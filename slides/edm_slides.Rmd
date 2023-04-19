@@ -1,0 +1,88 @@
+---
+title: "A Data Mining Approach for Detecting Collusion in Unproctored Online Exams<br>"
+subtitle: ""
+author: ""
+date: "11-24 July, 2023"
+location: "Bangalore"
+output:
+  xaringan::moon_reader:
+    css: ["default", "assets/ude_fonts.css", "assets/ude.css"]
+    self_contained: true # if true, fonts will be stored locally
+    seal: false # show a title slide with YAML information
+    includes:
+      in_header: "assets/mathjax-equation-numbers.html"
+    nature:
+      beforeInit: ["assets/remark-zoom.js"]
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9' #alternatives '16:9' or '4:3' or others e.g. 13:9
+      navigation:
+        scroll: TRUE #disable slide transitions by scrolling
+---
+class: title-slide  
+```{r, load_refs, include = FALSE, echo=FALSE, cache=FALSE}
+# packages
+source(here::here('slides/assets/packages.R'))
+
+library(RefManageR)
+BibOptions(
+  check.entries = TRUE,
+  bib.style = "authoryear",
+  cite.style = "authoryear",
+  style = "html",
+  hyperlink = TRUE,
+  dashed = FALSE
+)
+
+my_bib <- ReadBib("assets/library.bib", check = FALSE)
+#myBib <- ReadBib("assets/example.bib", check = FALSE)
+
+
+# infinity reader
+# options(servr.interval = 0.5)
+# xaringan::inf_mr()
+#RefManageR::NoCite(my_bib, "angristidentification1996")
+#RefManageR::NoCite(my_bib, "Huntington-Klein2022")
+
+
+```
+
+```{r xaringanExtra_progress-bar, echo = FALSE}
+xaringanExtra::use_progress_bar(color = "#004c93", location = "bottom")
+```
+
+```{r xaringanExtra-clipboard_2, echo=FALSE}
+# copy button styles mainly in ude.css 
+# https://github.com/gadenbuie/xaringanExtra
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #00ff00\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+
+desktop <- icons::icon_style(icons::fontawesome$solid$desktop, fill = "#004c93")
+exclamation <- icons::icon_style(icons::fontawesome$solid$exclamation, fill = "#004c93")
+square_right <- icons::icon_style(icons::fontawesome$solid$`caret-square-right`, fill = "#004c93")
+circle_right <- icons::icon_style(icons::fontawesome$solid$`arrow-circle-right`, fill ="#004c93")
+```
+<br>
+<br>
+# `r rmarkdown::metadata$title`
+
+
+.padding_left.pull-down.white[
+J. Langerbein, T. Massing, .bold[_J. Klenke_],  M. Striewe, M. Goedicke, C. Hanck, N. Reckmann
+<br>
+<br>
+<br>
+$15^{th}$ International Conference on Educational Data Mining
+
+Bangalore, `r rmarkdown::metadata$date`
+]
+
+
+
