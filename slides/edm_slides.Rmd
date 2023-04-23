@@ -23,7 +23,7 @@ output:
 class: title-slide  
 ```{r, load_refs, include = FALSE, echo=FALSE, cache=FALSE}
 # packages
-source(here::here('slides/assets/packages.R'))
+source(here::here('packages.R'))
 
 library(RefManageR)
 BibOptions(
@@ -35,16 +35,13 @@ BibOptions(
   dashed = FALSE
 )
 
-my_bib <- ReadBib("assets/library.bib", check = FALSE)
-#myBib <- ReadBib("assets/example.bib", check = FALSE)
-
+my_bib <- ReadBib(here::here("resources/library.bib", check = FALSE))
 
 # infinity reader
 # options(servr.interval = 0.5)
 # xaringan::inf_mr()
 #RefManageR::NoCite(my_bib, "angristidentification1996")
 #RefManageR::NoCite(my_bib, "Huntington-Klein2022")
-
 
 ```
 
