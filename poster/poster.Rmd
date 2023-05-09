@@ -12,9 +12,8 @@ affiliation:
     address: Ruhr Graduate School in Economics; Germany
 column_numbers: 3
 logoright_name: http&#58;//uni-due.de/imperia/md/images/offen_im_denken/signet_ude_rgb_neg.png
-logoleft_name: http&#58;//rgs-econ.org/typo3conf/ext/rwi_essen/Resources/Public/Icons/RGS_Logo_2019.svg
 bibliography: "../resources/library.bib"
-primary_colour: "#01A66F"
+primary_colour: "#004c93"
 poster_width: "33.1in"
 poster_height: "46.8in"
 #nocite: '@*'

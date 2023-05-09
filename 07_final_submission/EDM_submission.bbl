@@ -1,0 +1,125 @@
+\begin{thebibliography}{10}
+
+\bibitem{bowers}
+W.~Bowers.
+\newblock Student dishonesty and its control in college, 1964.
+
+\bibitem{ClusterEvents}
+R.~Chatterjee.
+\newblock Similarity/clustering methods for temporal event data, 2015 (accessed
+  2021).
+
+\bibitem{cleophas2021s}
+C.~Cleophas, C.~Hoennige, F.~Meisel, and P.~Meyer.
+\newblock Who's cheating? mining patterns of collusion from text and events in
+  online exams.
+\newblock {\em Mining Patterns of Collusion from Text and Events in Online
+  Exams (April 12, 2021)}, 2021.
+
+\bibitem{cluskey2011thwarting}
+G.~Cluskey~Jr, C.~R. Ehlen, and M.~H. Raiborn.
+\newblock Thwarting online exam cheating without proctor supervision.
+\newblock {\em Journal of Academic and Business Ethics}, 4(1):1--7, 2011.
+
+\bibitem{fask2015integrity}
+A.~Fask, F.~Englander, and Z.~Wang.
+\newblock On the integrity of online testing for introductory statistics
+  courses: A latent variable approach.
+\newblock {\em Practical Assessment, Research, and Evaluation}, 20(1):10, 2015.
+
+\bibitem{goldberg2021programming}
+D.~Goldberg.
+\newblock Programming in a pandemic: Attaining academic integrity in online
+  coding courses.
+\newblock {\em Communications of the Association for Information Systems},
+  48(1):6, 2021.
+
+\bibitem{harmon2008online}
+O.~R. Harmon and J.~Lambrinos.
+\newblock Are online exams an invitation to cheat?
+\newblock {\em The Journal of Economic Education}, 39(2):116--125, 2008.
+
+\bibitem{hastie_09}
+T.~Hastie, R.~Tibshirani, and J.~Friedman.
+\newblock {\em The elements of statistical learning: data mining, inference and
+  prediction}.
+\newblock Springer, 2 edition, 2009.
+
+\bibitem{Hellas_2017}
+A.~Hellas, J.~Leinonen, and P.~Ihantola.
+\newblock Plagiarism in take-home exams: Help-seeking, collaboration, and
+  systematic cheating.
+\newblock page 238–243, 2017.
+
+\bibitem{hemming2010online}
+A.~Hemming.
+\newblock Online tests and exams: lower standards or improved learning?
+\newblock {\em The Law Teacher}, 44(3):283--308, 2010.
+
+\bibitem{hollister2009proctored}
+K.~K. Hollister and M.~L. Berenson.
+\newblock Proctored versus unproctored online exams: Studying the impact of
+  exam environment on student performance.
+\newblock {\em Decision Sciences Journal of Innovative Education},
+  7(1):271--294, 2009.
+
+\bibitem{hussein2020evaluation}
+M.~J. Hussein, J.~Yusuf, A.~S. Deb, L.~Fong, and S.~Naidu.
+\newblock An evaluation of online proctoring tools.
+\newblock {\em Open Praxis}, 12(4):509--525, 2020.
+
+\bibitem{ihantola_2015}
+P.~Ihantola, A.~Vihavainen, A.~Ahadi, M.~Butler, J.~B{\"o}rstler, S.~H.
+  Edwards, E.~Isohanni, A.~Korhonen, A.~Petersen, K.~Rivers, et~al.
+\newblock Educational data mining and learning analytics in programming:
+  Literature review and case studies.
+\newblock {\em Proceedings of the 2015 ITiCSE on Working Group Reports}, pages
+  41--63, 2015.
+
+\bibitem{Leinonen_2016}
+J.~Leinonen, K.~Longi, A.~Klami, A.~Ahadi, and A.~Vihavainen.
+\newblock Typing patterns and authentication in practical programming exams.
+\newblock pages 160--165, 2016.
+
+\bibitem{manoharan2020upholding}
+S.~Manoharan and X.~Ye.
+\newblock On upholding academic integrity in online examinations.
+\newblock In {\em 2020 IEEE Conference on e-Learning, e-Management and
+  e-Services (IC3e)}, pages 33--37. IEEE, 2020.
+
+\bibitem{mccabe2001cheating}
+D.~L. McCabe, L.~K. Trevi{\~n}o, and K.~D. Butterfield.
+\newblock Cheating in academic institutions: A decade of research.
+\newblock {\em Ethics \&Behavior}, 11(3):219--232, 2001.
+
+\bibitem{miltenburg2019online}
+J.~Miltenburg.
+\newblock Online teaching in a large, required, undergraduate management
+  science course.
+\newblock {\em INFORMS Transactions on Education}, 19(2):89--104, 2019.
+
+\bibitem{olt2002ethics}
+M.~R. Olt.
+\newblock Ethics and distance education: Strategies for minimizing academic
+  dishonesty in online assessment.
+\newblock {\em Online journal of distance learning administration}, 5(3):1--7,
+  2002.
+
+\bibitem{R}
+{R Core Team}.
+\newblock {\em R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2021.
+
+\bibitem{Schwinning2017}
+N.~Schwinning, M.~Striewe, T.~Massing, C.~Hanck, and M.~Goedicke.
+\newblock Towards digitalisation of summative and formative assessments in
+  academic teaching of statistics.
+\newblock In {\em Proceedings of the Fifth International Conference on Learning
+  and Teaching in Computing and Engineering}, 2017.
+
+\bibitem{shon2006college}
+P.~C. Shon.
+\newblock How college students cheat on in-class examinations: Creativity,
+  strain, and techniques of innovation, 2006.
+
+\end{thebibliography}

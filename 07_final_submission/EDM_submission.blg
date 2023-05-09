@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: EDM_submission.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: abbrv.bst
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+Database file #1: bibliography.bib
+Warning--empty journal in Hellas_2017
+Warning--empty journal in Leinonen_2016
+You've used 21 entries,
+            2118 wiz_defined-function locations,
+            631 strings with 8049 characters,
+and the built_in function-call counts, 7023 in all, are:
+= -- 687
+> -- 350
+< -- 4
++ -- 141
+- -- 118
+* -- 481
+:= -- 1168
+add.period$ -- 61
+call.type$ -- 21
+change.case$ -- 120
+chr.to.int$ -- 0
+cite$ -- 23
+duplicate$ -- 265
+empty$ -- 530
+format.name$ -- 118
+if$ -- 1460
+int.to.chr$ -- 0
+int.to.str$ -- 21
+missing$ -- 18
+newline$ -- 105
+num.names$ -- 42
+pop$ -- 131
+preamble$ -- 1
+purify$ -- 100
+quote$ -- 0
+skip$ -- 205
+stack$ -- 0
+substring$ -- 387
+swap$ -- 64
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 82
+warning$ -- 2
+while$ -- 70
+width$ -- 23
+write$ -- 221
+(There were 2 warnings)
