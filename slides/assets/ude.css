@@ -38,20 +38,20 @@ To specify the margin of the first title h1
 
 .pull-left-2 {
   float: left;
-  width: 60%;
+  width: 75%;
 }
 .pull-right-1 {
   float: right;
-  width: 36%;
+  width: 20%;
 }
 
 .pull-left-1 {
   float: left;
-  width: 36%;
+  width: 20%;
 }
 .pull-right-2 {
   float: right;
-  width: 60%;
+  width: 75%;
 }
 
 
