@@ -71,9 +71,6 @@ exclamation <- icons::icon_style(icons::fontawesome$solid$exclamation, fill = "#
 square_right <- icons::icon_style(icons::fontawesome$solid$`caret-square-right`, fill = "#004c93")
 circle_right <- icons::icon_style(icons::fontawesome$solid$`arrow-circle-right`, fill ="#004c93")
 
-option_list <- list(max.names = 2)
-names(option_list) <- c("max.names")
-
 ```
 <br>
 <br>
@@ -108,11 +105,25 @@ name: introduction
 # Introduction
 
 * COVID-19 forced universities to switch to online classes and exams.
-* Proctoring online exams with video conference software was often prohibited due to data protection regulations.
-* Take-home exams were conducted as open-book, but collaboration was strictly prohibited.
+* Proctoring online exams with video conference software was often prohibited due to data protection regulations and economically unfeasible.
+* In this case study take-home exams were conducted as open-book, but collaboration was strictly prohibited.
 * Hierarchical clustering algorithms were used to identify groups of potentially colluding students.
 * The method successfully found groups with nearly identical exams.
 * A proctored comparison group helped categorize student groups as "outstandingly similar".
+
+
+
+```{r, echo=FALSE, eval=TRUE}
+
+test1 <- Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))
+test2 <- Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))
+test3 <- Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))
+test4 <- Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 1))
+test5 <- Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 1))
+
+
+```
+
 
 ---
 name: related_work
@@ -120,12 +131,13 @@ name: related_work
 # Related work
 
 * Limited research exists on unproctored exams at universities prior to the pandemic.
-* `r Citet(my_bib, 'cleophas2021s', .opts = list(max.names = 2))` propose a method using event logs to detect collusion in unproctored exams.
-* Previous studies focused on similarity measures for programming exams based on keyboard patterns.
-* Other literature relies on surveys or interviews, lacking actual student behavior data on collusion.
-* Various proctoring options exist for take-home exams, but they can be costly or prohibited by law.
+* `r Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))` propose a method using event logs to detect collusion in unproctored exams.
+* Previous studies focused on similarity measures for programming exams based on keyboard patterns, f.e. `r Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))` and `r Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))`.
+* Other literature (f.e. `r Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 1))`) relies on surveys or interviews, lacking actual student behavior data on collusion.
 * Some studies suggest that unsupervised online exams may lead to collusion.
-* GPA and final exam scores have been used to analyze collusion but not data collected during the exam.
+* `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 1))` used GPA and final exam scores to analyze collusion but not data collected during the exam.
+
+
 
 ---
 name: methodology
@@ -133,21 +145,21 @@ name: methodology
 # Methodology - Data set
 
 * Data for the study was collected from the "Descriptive Statistics" course at the University Duisburg-Essen, Germany.
-* The test group took the unproctored exam during the COVID-19 pandemic, while the comparison group took a proctored exam before the pandemic.
+* The test group took the unproctored exam at home during the COVID-19 pandemic, while the comparison group took a proctored exam in class before the pandemic.
 * The exams consisted of arithmetical problems, programming tasks in R, and a short essay task.
-* Event logs captured students' activities and timestamps during the exams, and points achieved per task were recorded.
+* Event logs captured students' activities and time stamps during the exams, and points achieved per task were recorded.
 * Data cleaning was conducted, removing students with minimal participation or achievement, as well as those with reported internet problems.
 * Despite differences in exam format, both groups shared similar content and learning goals, with opportunities for questions and discussions.
 ---
 # Methodology - Data set
 
-```{r, echo = FALSE, warning = FALSE}
+```{r, echo = FALSE, warning = FALSE, eval=FALSE}
 DiagrammeR::grViz("digraph {
   graph [layout = dot, rankdir = TB, overlap = true, fontsize = 10]
   
   node [shape = rectangle]        
   x1 [label = 'Comparison group (2018/2019)']
-  x2 [label = 'Test grpup (2020/2021)']
+  x2 [label = 'Test group (2020/2021)']
   
       node [shape = rectangle, style = dotted]        
 
@@ -176,34 +188,48 @@ DiagrammeR::grViz("digraph {
   width = 1000)
 ```
 
+$\quad$
+$\quad$
+
+| | Comparison group | Test group |
+| :------: | :------: | :------: |
+| Year | $2018/2019$ | $2020/2021$ |
+| N | $109$ | $151$ |
+| Style | proctored/in class | unproctored/at home | 
+| Total points | $60$ | $60$ | 
+| Sub tasks | $19$ | $17$ | 
+| Minutes | $60$ | $60$ | 
+  
+
 
 ---
 
 # Methodology - Model
 
-* agglomerative (botto-up) hierachical clusteirng algorithm
-* global pairwise dissimilarities
+* Agglomerative (bottom-up) hierarchical clustering algorithm
+* Global pairwise dissimilarities
 
 $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j}) \quad with \quad \sum_{j=1}^h w_j = 1$$
-* $D(x_i, x_{i'})$: global pairwise dissimilarite
-* $d_j(x_{ij}, x_{i'j})$: pairwise attribute dissimilarity
-* $i = 1, ..., N$ with N = 151 students
+* $D(x_i, x_{i'})$: Global pairwise dissimilarity
+* $d_j(x_{ij}, x_{i'j})$: Pairwise attribute dissimilarity
+* $i = 1, ..., N$ with $N = 151$ students
 * $j = 1, ..., h$ attributes
 * We compared two different kinds of attributes:
-  * dissimilarities in the student´s event patters (time of submission)
-  * dissimilarities in points achieved
+  * Dissimilarities in the student´s event patters (time of submission)
+  * Dissimilarities in points achieved
   
 ---
 
 # Methodology - Model
 
-### dissimilarities in the student´s event patters (time of submission)
+### Dissimilarities in the student´s event patters (time of submission)
 
 * $d_j^L(v_{ij}, v_{i'j})$ with weights $w_j^L$
-* We divided the examination into m = 1, ... , 70 interval, since both exams took 70 min
-* $v_{ijm}$ denotes the count of answers of student $i$ during the $m$th interval
-* Manhatten metric used for calculation of the pairwise attribute dissimilarity
-  
+* We divided the examination into $m = 1, ... , 70$ intervals, since both exams took $70$ min.
+* $v_{ijm}$ denotes the count of answers of student $i$ during the $m$-th interval.
+* Manhatten metric used for calculation of the pairwise attribute dissimilarity.
+
+$\quad$
   
 $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
   
@@ -211,12 +237,13 @@ $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
   
 # Methodology - Model  
   
-### dissimilarities in points achieved
+### Dissimilarities in points achieved
 
 * $d_j^P(s_{ij}, s_{i'j})$ with weights $w_j^P$
-* $s_{ij}$ denotes the points achieved by student $i$ in the $j$th subtask
-* absolute diffrenced used as dissimilarity measure
-  
+* $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th sub task.
+* Absolute difference used as dissimilarity measure.
+
+$\quad$
   
 $$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
 
@@ -227,25 +254,30 @@ $$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
 
 ### Full model
 
-$$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))$$
-with $$\sum_{j=1}^h w_j^P + w_j^L =1$$
+$$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))
+\quad \text{with} \quad \sum_{j=1}^h w_j^P + w_j^L =1$$
 
-* weights $w_j$ control the influence each attribute on the global object dissimilarity
-* we reduced the weights for 
+* Weights $w_j$ control the influence each attribute on the global object dissimilarity.
+* We reduced the weights for: 
   * R-tasks and free-text questions, since the event log might not be comparable in these cases
-  * points achieved
-* Since dissimilarity measures depend on scale, the attributes were normalized
+  * Points achieved
+* Since dissimilarity measures depend on scale, the attributes were normalized.
 
 ---
 name: empirical_results
 
 # Empirical results
+
+### Test group
+
 .pull-left-2[
-```{r, out.width="80%", fig.align="center", fig.cap=c("Caption: Timeline for the key events in the 2019 summer term course Inferential Statistics (treatment cohort)"), echo=FALSE}
+```{r, out.width="100%", fig.align="center", fig.cap=c("Figure 1: Dendogram produced by average linkage clustering of the unproctored test group (2020/21). A-F mark the clusters with the lowest dissimilarity."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/figure1.png'))
 
 ```
+
+
 ]
 
 .pull-right-1[
@@ -254,60 +286,99 @@ knitr::include_graphics(here::here('resources/graphics/figure1.png'))
 <br>
 .blockquote.font60.middle[
 ### Results  
-- Cluster A, B and C have a high similarity 
+- Cluster **A**, **B** and **E** have a strikingly high similarity 
 ]
 ]
+
 
 
 ---
 
 # Empirical results
 
-```{r, echo=FALSE}
-path0 = here::here()
-path1 = "08_presentation_slides/graphics/figure2_with_caption"
-path_figure1 = paste0(path0, "/", path1, ".png")
+```{r, out.width="85%", fig.align="center", fig.cap=c("Figure 2: Comparison of the event logs and achieved points for each of the test group´s (2020/21) six lowest dissimilaity clusters (A-F). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
-image_path <- path_figure1
-image_title1 <- "Figure 1 XYZXYZXYZX"
-
-markdown_code2 <- paste0("![", image_title1, "](", path_figure1, ")")
+knitr::include_graphics(here::here('resources/graphics/figure2.png'))
 
 ```
 
-`r markdown_code2`
-
 ---
 
+# Empirical results
 
-# Empirical results - FIG 3
+### Comparison group
 
-```{r, echo=FALSE}
-path0 = here::here()
-path1 = "08_presentation_slides/graphics/figure3"
-path_figure1 = paste0(path0, "/", path1, ".png")
 
-image_path <- path_figure1
-image_title1 <- "Figure 1 XYZXYZXYZX"
+.pull-left-2[
+```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("Figure 3: Dendogram produced by average linkage clustering of the unproctored test group (2018/19). G-L mark the clusters with the lowest dissimilarity"), echo=FALSE}
 
-markdown_code3 <- paste0("![", image_title1, "](", path_figure1, ")")
+knitr::include_graphics(here::here('resources/graphics/figure3.png'))
 
 ```
 
-`r markdown_code3`
+
+]
+
+.pull-right-1[
+<br>
+<br>
+<br>
+.blockquote.font60.middle[
+### Results  
+- In comparison no cluster seems to stand out noticeably during the proctored exam  
+]
+]
+---
+
+
+# Empirical results
+
+```{r, out.width="85%", fig.align="center", fig.cap=c("Figure 4: Comparison of the event logs and achieved points for each of the test group´s (2018/19) six lowest dissimilaity clusters (G-L). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/figure4.png'))
+#png ratio 1400 750
+
+```
+
+
+---
+
+# Empirical results
+
+
+.pull-left[
+```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("Figure 5.1: Comparison of the non-normalised distance measures."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/figure5.1.png'))
+
+```
+
+
+]
+
+.pull-right[
+```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("Figure 5.2: Comparison of the  normalised distance measures."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/figure5.2.png'))
+
+```
+]
+
+
+
 
 
 
 
 ---
 
-# Summary
+# Discussion
 
 * The results of hierarchical clustering algorithms are presented in a dendrogram, providing a visual representation of the clustering results.
 * A dendrogram resembles a tree structure, where objects are merged based on their dissimilarity in a bottom-up approach.
 * Various hierarchical clustering algorithms exist, and the cophenetic correlation coefficient is used to assess how well each algorithm represents the original structure in the data.
 * Average linkage clustering is deemed the most suitable algorithm for the analysis.
-* The dendrogram shows compact clusters at medium dissimilarities, with three notable clusters (A, B, and E) consisting of two students each, indicating the absence of collusion in larger groups.
+* The dendrogram shows compact clusters at medium dissimilarities, with three notable clusters (**A**, **B**, and **E**) consisting of two students each, indicating the absence of collusion in larger groups.
 * Scatterplots and barcharts are used to examine the similarity of students' chronology and achieved points within clusters.
 * Comparison with the results from the comparison group supports the findings, indicating that collusion over the entire exam is unlikely, and the differences between the groups are not coincidental.
 
@@ -317,6 +388,8 @@ name: discussion
 
 * The method successfully detects at least three clusters with near identical exams.
 * The approach provides a basis for further examination of clusters based on comparison with a reference group, but the ground truth is not known, limiting the certainty of conclusions.
+* Nevertheless, the elevated risk of detection may indeed discourage students from cheating in unproctored exams. 
+* This is not only a important step in adapting to the progressing digitization of education, but it also equips us better for unforeseen situations in the future, much like the COVID-19 pandemic.
 
 ---
 name: references
