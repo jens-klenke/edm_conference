@@ -296,7 +296,7 @@ knitr::include_graphics(here::here('resources/graphics/figure1.png'))
 
 # Empirical results
 
-```{r, out.width="85%", fig.align="center", fig.cap=c("Figure 2: Comparison of the event logs and achieved points for each of the test group´s (2020/21) six lowest dissimilaity clusters (A-F). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 2:</strong> Comparison of the event logs and achieved points for each of the test group´s (2020/21) six lowest dissimilaity clusters (A-F). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/figure2.png'))
 
