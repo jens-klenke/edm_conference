@@ -20,8 +20,16 @@ poster_height: "46.8in"
 output:  
   posterdown::posterdown_html:
     self_contained: true
-knit: pagedown::chrome_print
+#knit: pagedown::chrome_print
 ---
+
+<style>
+.poster_title {
+  margin-top: 200px; 
+}
+</style>
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
