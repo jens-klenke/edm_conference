@@ -198,11 +198,24 @@ DiagrammeR::grViz("digraph {
 <br>
 <br>
 
+
 <html>
 <style>
+table {
+  border-collapse: collapse;
+}
 table, th, td {
-  border:0px solid black;
-  text-align: center; /* Add this line */
+  text-align: center;
+}
+th, td {
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+th:first-child, td:first-child {
+  border-right: 2px solid black;
+}
+tr:first-child th, tr:first-child td {
+  border-bottom: 2px solid black;
 }
 </style>
 <body>
@@ -249,7 +262,6 @@ table, th, td {
 
 </body>
 </html>
-
 
 
 ---
@@ -348,53 +360,15 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
 ]
 ]
 
-<p style="font-size: 70%;">
-
+<h3 style="margin-bottom: -15px;">Results</h3>
+<p style="margin-top: 0; font-size: 70%;">
 <ul>
-    <li>The control group has an overall higher level of dissimilarity and doesn´t contain any strikingly similar cluster.</li>
-    <li>The six lowest cluster from the test group stand out in terms of similarity, specially cluster <strong>A</strong>, <strong>B</strong> and <strong>E</strong>.</li>
+    <li>The control group has an overall higher level of dissimilarity and doesn´t contain any strikingly similar cluster.
+    The six lowest cluster from the test group stand out in terms of similarity, specially cluster <strong>A</strong>, <strong>B</strong> and <strong>E</strong>.</li>
 </ul>
-
 </p>
 
 
----
-
-
-<h2>Empirical results — <span style="font-size: 0.8em;"> Dendogram </span> </h2>
-
-
-
-
-```{r xaringan-panelset2, echo=FALSE}
-xaringanExtra::use_panelset()
-style_panelset_tabs(foreground = "white", background = "#004c93")
-```
-
-
-.panelset[
-.panel[.panel-name[Control group2]
-
-```{r, out.height=="50%", fig.align="center", fig.cap=c("<strong> Figure 3: </strong> Dendogram produced by average linkage clustering of the unproctored test group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
-
-knitr::include_graphics(here::here('resources/graphics/dendogram_control.png'))
-#95% geht
-```
-]
-
-.panel[.panel-name[Test group2]
-
-```{r, out.width="60%", fig.align="center", fig.cap=c("<strong>Figure 4:</strong>  Dendogram produced by average linkage clustering of the unproctored test group (2020/21). <strong> A-F </strong> mark the clusters with the lowest dissimilarity."), echo=FALSE}
-
-knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
-
-```
-]
-]
-
-
-* The control group has an overall higher level of dissimilarity and doesn´t contain any strikingly similar cluster. 
-* The six lowest cluster from the test group stand out in terms of similarity, specially cluster **A**, **B** and **E**.
 
 
 ---
