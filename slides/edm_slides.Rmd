@@ -434,30 +434,6 @@ knitr::include_graphics(here::here('resources/graphics/cowplot1.png'))
 ]
 
 
----
-
-<h1>Empirical results — <span style="font-size: 0.8em;">Cluster comparison</span></h1>
-
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 2:</strong> Comparison of the event logs and achieved points for each of the test group´s (2020/21) six lowest dissimilaity clusters (<strong>A-F</strong>). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
-
-knitr::include_graphics(here::here('resources/graphics/cowplot1.png'))
-
-```
-
----
-
-
-<h1>Empirical results — <span style="font-size: 0.8em;">Cluster comparison</span></h1>
-
-
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong> Figure 4: </strong> Comparison of the event logs and achieved points for each of the control group´s (2018/19) six lowest dissimilaity clusters (<strong>G-L</strong>). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
-
-knitr::include_graphics(here::here('resources/graphics/cowplot2.png'))
-#png ratio 1400 750
-
-```
-
-
 
 ---
 
@@ -469,24 +445,26 @@ knitr::include_graphics(here::here('resources/graphics/cowplot2.png'))
 * Average linkage clustering is deemed the most suitable algorithm for the analysis.
 * The dendrogram shows compact clusters at medium dissimilarities, with three notable clusters (**A**, **B**, and **E**) consisting of two students each, indicating the absence of collusion in larger groups.
 * Scatterplots and barcharts are used to examine the similarity of students' chronology and achieved points within clusters.
-* Comparison with the results from the comparison group supports the findings, indicating that collusion over the entire exam is unlikely, and the differences between the groups are not coincidental.
+
 
 ---
 name: discussion
 <h1> Discussion </h1>
 
+* Comparison with the results from the comparison group supports the findings, indicating that collusion over the entire exam is unlikely, and the differences between the groups are not coincidental.
 * The method successfully detects at least three clusters with near identical exams.
 * The approach provides a basis for further examination of clusters based on comparison with a reference group, but the ground truth is not known, limiting the certainty of conclusions.
 * Nevertheless, the elevated risk of detection may indeed discourage students from cheating in unproctored exams. 
 * This is not only a important step in adapting to the progressing digitization of education, but it also equips us better for unforeseen situations in the future, much like the COVID-19 pandemic.
 
 
-<h2> Further research </h2>
+
+---
+
+<h1> Further research </h1>
 
 * Exploring the long-term effectiveness of the detection method in deterring students from colluding in exams, and its impact on academic integrity and student behavior.
 * Development and implementation of methods to collect and analyze complementary evidence, with the aim of improving detection rates and understanding the extent of collusion among students.
-
-
 
 
 ---
