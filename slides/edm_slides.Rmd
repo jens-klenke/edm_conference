@@ -434,6 +434,87 @@ knitr::include_graphics(here::here('resources/graphics/cowplot1.png'))
 ]
 
 
+---
+
+
+<h2>Empirical results — <span style="font-size: 0.8em;">Cluster comparison</span></h2>
+
+
+
+
+```{r xaringan-panelset4, echo=FALSE}
+xaringanExtra::use_panelset()
+style_panelset_tabs(foreground = "white", background = "#004c93")
+```
+
+
+.panelset[
+.panel[.panel-name[AB]
+
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of the clusters <strong>A</strong> and <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/plot_ab.png'))
+
+```
+]
+
+.panel[.panel-name[CD]
+
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of the clusters <strong>C</strong> and <strong>D</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/plot_cd.png'))
+#png ratio 1400 750
+
+```
+]
+
+.panel[.panel-name[EF]
+
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of the clusters <strong>E</strong> and <strong>F</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/plot_ef.png'))
+#png ratio 1400 750
+
+```
+]
+
+
+
+.panel[.panel-name[GH]
+
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of the clusters <strong>G</strong> and <strong>H</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/plot_gh.png'))
+#png ratio 1400 750
+
+```
+]
+
+
+.panel[.panel-name[IJ]
+
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of the clusters <strong>I</strong> and <strong>J</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/plot_ij.png'))
+#png ratio 1400 750
+
+```
+]
+
+.panel[.panel-name[KL]
+
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of the clusters <strong>K</strong> and <strong>L</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/plot_kl.png'))
+#png ratio 1400 750
+
+```
+]
+
+
+]
+
+
 
 ---
 
