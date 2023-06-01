@@ -1,15 +1,23 @@
 ---
-title: Median-Based Splitting Rules For The Causal Tree
+title: A Data Mining Approach for Detecting Collusion in Unproctored Online Exams
 author:
-  - name: Jens Klenke
+  - name: J. Langerbein
     affil: (1)
-  - name: Lennard Maßmann
-    affil: (1,2)
+  - name: T. Massing
+    affil: (1)
+  - name: J. Klenke
+    affil: (1)
+  - name: M. Striewe
+    affil: (1)
+  - name: M. Goedicke 
+    affil: (1) <br>
+  - name: C. Hanck
+    affil: (1)
+  - name: N. Reckmann
+    affil: (1)
 affiliation:
   - num: (1)
     address: Chair of Econometrics, University of Duisburg-Essen; Germany
-  - num: (2)
-    address: Ruhr Graduate School in Economics; Germany
 column_numbers: 3
 logoright_name: http&#58;//uni-due.de/imperia/md/images/offen_im_denken/signet_ude_rgb_neg.png
 bibliography: "../resources/library.bib"
@@ -25,9 +33,47 @@ output:
 
 <style>
 .poster_title {
-  margin-top: 200px; 
+  margin-top: 150px; 
 }
 </style>
+
+<style>
+.logo_right {
+    position: relative;
+    top: -30px;
+    right: 100px;
+}
+</style>
+
+
+```{r, load_refs, include = FALSE, echo=FALSE, cache=FALSE}
+# packages
+source(here::here('resources/packages.R'))
+
+library(RefManageR)
+BibOptions(
+  check.entries = TRUE,
+  bib.style = "authoryear",
+  cite.style = "authoryear",
+  style = "html",
+  hyperlink = TRUE,
+  dashed = FALSE
+)
+
+
+
+my_bib <- ReadBib(here::here("resources/library.bib"), check = FALSE)
+#myBib <- ReadBib("assets/example.bib", check = FALSE)
+
+
+# infinity reader
+# options(servr.interval = 0.5)
+# xaringan::inf_mr()
+#RefManageR::NoCite(my_bib, "angristidentification1996")
+#RefManageR::NoCite(my_bib, "Huntington-Klein2022")
+
+
+```
 
 
 
@@ -39,15 +85,37 @@ source(here::here('resources/packages.R'))
 
 # Introduction
 
-Our paper contributes to the literature on tree-based methods for causal inference and treatment effect estimation in high-dimensional data settings. We investigate splitting rules of causal trees, which are a variation of standard regression trees [@atheyRecursive2016]. Tree-based methods can be used for causal inference and treatment effect estimation, especially when the number of features is large in relation to the number of observations. We consider the potential outcome framework with i.i.d. sampled data $(X_i, Y_i, D_i)$ for $i = 1, ..., N$ with a binary treatment indicator $D_i$, the outcome variable $Y_i$ and $X$ the feature matrix of dimension $N \times K$ with $k=1,...,K$. A CART regression tree $\Pi$  divides the feature space into separate segments in a recursive manner until reaching a set of leafs $\Pi =\{l_1, ..., l_L\}$, aiming at precisely estimating the expectation of the outcome variable conditional on the regressors, $\mu(X_i=x)= \mathbb{E}[Y_i|X_i]$. 
-Given SUTVA, unconfoundedness and positivity assumptions, the CATE can be identify as
+During the COVID-19 pandemic, we recognized the challenge universities faced transitioning to online classes and exams, especially given the limitations of proctoring due to privacy regulations. Recognizing the limitations in preventing illicit collaboration during online exams, we decided to propose a data-driven method to identify potential collusion among students post-exam. We developed a method using an alternative distance measure and hierarchical clustering algorithms to pinpoint groups of students with remarkably similar exam results. Our method builds upon previous research that used exam event logs to detect collusion. Additionally, we present an approach to categorize groups as "outstandingly similar" using a proctored comparison group, with further details about our methodology and results provided in the subsequent sections of our paper.
 
-$$\tau(X_i=x) = \mathbb{E}[Y_i(D_i=1)-Y_i(D_i=0)|X_i=x]. $$
-Results of a simulation study suggest that the proposed median-based splitting rules improve CATE coverage if covariates are independent. When covariates are correlated, all considered splitting rules provide too wide conformal intervals leading to overcoverage.
 
-# Splitting Rules
+# Related work
 
-Median-based splitting rules can be used as an alternative to spliting rules which are based on the mean-squared error. With focus on treatment effect analysis rather than predictive outcome accuracy, we develop three different splitting rules based on the Median Absolute Deviation (MAD), Median Squared Deviation (MSD) and Least Median Square (LMS). Since we are not able to observe both potential outcomes $(Y_i(1), Y_i(0))$ for each unit $i$, we use the Hodges-Lehmann estimator to estimate the median of the difference between the observed treatment and control groups [@roy_robustness_2012].
+There is a scarcity of research focusing on unproctored exams at universities prior to the COVID-19 pandemic. A method for detecting collusion in such unproctored exams using event logs has been proposed by `r Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))`. A number of previous studies have concentrated on similarity measures for programming exams based on keyboard patterns, as can be seen in works by `r Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))` and `r Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))`. However, other literature, such as `r Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 2))`, primarily relies on surveys or interviews, consequently lacking concrete student behavior data concerning collusion. A few studies suggest that unsupervised online exams could possibly lead to an increase in collusion. Notably, `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))` utilized GPA and final exam scores to analyze potential collusion, however, they did not utilize data collected during the exam itself.
+
+
+# Methodology
+
+The study utilized data from the Descriptive Statistics course at the University Duisburg-Essen, Germany, comparing a test group, which took an unproctored exam at home during the COVID-19 pandemic, to a comparison group that had a proctored exam in class prior to the pandemic. Both groups' exams encompassed arithmetical problems, R programming tasks, and a short essay task. During the exams, students' activities and time stamps were recorded in event logs, and the points achieved per task were noted. The dataset was cleaned to remove students with minimal participation or achievement and those who experienced internet issues, ensuring the comparability of both groups, despite the differing exam formats, as they shared similar content and learning goals.
+
+
+The agglomerative (bottom-up) hierarchical clustering algorithm can be described by following equations:
+
+$$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
+$D(x_i, x_{i'})$ is the global pairwise dissimilarity, while $d_j(x_{ij}, x_{i'j})$ denotes the pairwise attribute dissimilarity. The weights $w_j$ sum up to 1. Index $i$ denotes the number of Students ($N = 151$)$i = 1, ..., N$ with $N = 151$ students, while $j$ is the index for each of the $h$ attributes.
+
+We compared two different kinds of attributes, namely the dissimilarities in the student´s event patters (time of submission)
+as well as the dissimilarities in points achieved.
+
+
+# Empirical results
+
+# Discussion
+
+In our discussion, we interpret the results of hierarchical clustering algorithms which are visually represented through a dendrogram, a tree-like structure. After comparing various algorithms, we find average linkage clustering to be the most fitting for our analysis, helping us identify compact clusters, notably clusters A, B, and E, indicative of no larger group collusion. Additional visual tools like scatterplots and barcharts aid in examining student similarities within these clusters. The comparison with a reference group supports the effectiveness of our method in detecting collusion, but limitations exist due to the unknown ground truth. Despite this, our approach not only helps deter cheating in unproctored exams but also contributes to the broader digital transformation of education, preparing us for any unforeseen future challenges similar to the COVID-19 pandemic.
+
+# References
+
+
 
 \begin{align}
 \widehat{\operatorname{MAD}}_\tau &(\mathcal{S}^{tr}, S^{tr}, \Pi) = \Big |\frac{1}{ N^{tr}} \sum \limits_{i \in \mathcal{S}^{tr}} {\hat\tau}(X_i; \mathcal{S}^{tr}, \Pi) \\ &-\hat{\tau}_{HL}(X_i; \mathcal{S}^{tr}, \Pi)\Big|, 
@@ -61,14 +129,10 @@ Median-based splitting rules can be used as an alternative to spliting rules whi
 \widehat{\operatorname{LMS}}_\tau (\mathcal{S}^{tr}, \mathcal{S}^{tr}, \Pi) =\underset{i \in \mathcal{S}^{tr}}{\operatorname{med}}\thinspace [(Y_i -& \hat{\mu}(D_i, X_i; \\ & \mathcal{S}^{tr}, \Pi))^2].
 \end{align}
 
-# Conclusion / Outlook
-
-We implement three new median-based splitting rules into the causal tree for CATE estimation. Simulation results suggest competitive RMSE-results and improved conformal coverage rates in comparison to benchmark splitting rules, at least for LMS. An application to the Lalonde dataset demonstrates the usage in a more realistic setting. As next steps, we plan to examine CATE coverage more thoroughly across methods (conformal vs. bootstrap intervals) and settings (higher dimensions, more complex variable interactions).
 
 
 
 
-# References
 
 <div id="refs"></div>
 
