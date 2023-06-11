@@ -10,8 +10,8 @@ author:
   - name: M. Striewe
     affil: (1)
   - name: M. Goedicke 
-    affil: (1) <br>
-  - name: C. Hanck
+    affil: (1) 
+  - name: <br> C. Hanck
     affil: (1)
   - name: N. Reckmann
     affil: (1)
@@ -36,6 +36,7 @@ output:
   margin-top: 150px; 
 }
 </style>
+
 
 <style>
 .logo_right {
@@ -72,6 +73,8 @@ my_bib <- ReadBib(here::here("resources/library.bib"), check = FALSE)
 #RefManageR::NoCite(my_bib, "angristidentification1996")
 #RefManageR::NoCite(my_bib, "Huntington-Klein2022")
 
+test1 <- Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))
+
 
 ```
 
@@ -84,6 +87,7 @@ source(here::here('resources/packages.R'))
 ```
 
 # Introduction
+
 
 During the COVID-19 pandemic, we recognized the challenge universities faced transitioning to online classes and exams, especially given the limitations of proctoring due to privacy regulations. Recognizing the limitations in preventing illicit collaboration during online exams, we decided to propose a data-driven method to identify potential collusion among students post-exam. We developed a method using an alternative distance measure and hierarchical clustering algorithms to pinpoint groups of students with remarkably similar exam results. Our method builds upon previous research that used exam event logs to detect collusion. Additionally, we present an approach to categorize groups as "outstandingly similar" using a proctored comparison group, with further details about our methodology and results provided in the subsequent sections of our paper.
 
@@ -100,39 +104,88 @@ The study utilized data from the Descriptive Statistics course at the University
 
 The agglomerative (bottom-up) hierarchical clustering algorithm can be described by following equations:
 
+
+<div style="margin-top: -70px;">
 $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
+</div>
+
+<div style="margin-top: -40px;">
+
 $D(x_i, x_{i'})$ is the global pairwise dissimilarity, while $d_j(x_{ij}, x_{i'j})$ denotes the pairwise attribute dissimilarity. The weights $w_j$ sum up to 1. Index $i$ denotes the number of Students ($N = 151$)$i = 1, ..., N$ with $N = 151$ students, while $j$ is the index for each of the $h$ attributes.
 
-We compared two different kinds of attributes, namely the dissimilarities in the student´s event patters (time of submission)
-as well as the dissimilarities in points achieved.
+</div>
+
+
+We compared two different kinds of attributes, namely the dissimilarities in the student´s event patters (time of submission) defined as $d_j^L(v_{ij}, v_{i'j})$ and the dissimilarities in points achieved $d_j^P(s_{ij}, s_{i'j})$.
+
+
+<div style="margin-top: -100px;">
+<small> 
+$$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))$$
+</small>
+</div>
+
+<div style="margin-top: -20px;">
+is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
+</div>
+
 
 
 # Empirical results
+
+```{r, out.width="100%", fig.align="center", fig.cap=c("Dendogram produced by average linkage clustering of the proctored control group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/dendogram_control.png'))
+#95% geht
+```
+
+Figure 1 displays the dendrogram of the proctored exam, which we used as a control group to establish a baseline for comparison. This dendrogram provides a visualization of what to expect without any collusion. Figure 2 depicts the test group, in which students were allowed to participate in the exam from home. The dendrogram of the test group reveals a lower overall level of dissimilarity compared to the control group. Notably, the six clusters with the lowest dissimilarity, labeled A-F, stand out significantly from the rest of the cohort.
+
+
+```{r, out.width="100%", fig.align="center", fig.cap=c("Dendogram produced by average linkage clustering of the unproctored test group (2020/21). <strong> A-F </strong> mark the clusters with the lowest dissimilarity."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
+
+```
+
+A comparison of the normalized distributions of the dissimilarities measures (figure 3) further shows, that 3 points from the test group are considerably distinct from the rest of the data points, which are marked by a red circle.
+
+```{r, out.width="90%", out.height="60%", fig.align="center", fig.cap=c("Comparison of the  normalised distance measures."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/boxplot2.png'))
+
+```
+
+
+```{r, out.width="100%", fig.align="center", fig.cap=c("Comparison of the event logs and achieved points of the clusters <strong>E</strong> and <strong>F</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/plot_ef.png'))
+#png ratio 1400 750
+
+```
 
 # Discussion
 
 In our discussion, we interpret the results of hierarchical clustering algorithms which are visually represented through a dendrogram, a tree-like structure. After comparing various algorithms, we find average linkage clustering to be the most fitting for our analysis, helping us identify compact clusters, notably clusters A, B, and E, indicative of no larger group collusion. Additional visual tools like scatterplots and barcharts aid in examining student similarities within these clusters. The comparison with a reference group supports the effectiveness of our method in detecting collusion, but limitations exist due to the unknown ground truth. Despite this, our approach not only helps deter cheating in unproctored exams but also contributes to the broader digital transformation of education, preparing us for any unforeseen future challenges similar to the COVID-19 pandemic.
 
+
+# Further research
+
+Future studies might focus on  exploring the long-term effectiveness of the detection method in deterring students from colluding in exams, and its impact on academic integrity and student behavior. Also, the development and implementation of methods to collect and analyze complementary evidence, might be interesting for further research, with the aim of improving detection rates and understanding the extent of collusion among students.
+
+
+
 # References
 
 
+<font size="6"> 
 
-\begin{align}
-\widehat{\operatorname{MAD}}_\tau &(\mathcal{S}^{tr}, S^{tr}, \Pi) = \Big |\frac{1}{ N^{tr}} \sum \limits_{i \in \mathcal{S}^{tr}} {\hat\tau}(X_i; \mathcal{S}^{tr}, \Pi) \\ &-\hat{\tau}_{HL}(X_i; \mathcal{S}^{tr}, \Pi)\Big|, 
-\end{align}
+```{r refs2, echo=FALSE, results="asis", warning = FALSE}
+#test_bib <- Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))
+PrintBibliography(my_bib, .opts = list(style = "text", "max.names" = 100), start = 1)
+```
 
-\begin{align}
-\widehat{\operatorname{MSD}}_\tau &(\mathcal{S}^{tr}, \mathcal{S}^{tr}, \Pi) = \frac{1}{N^{tr}} \sum \limits_{i \in \mathcal{S}^{tr}} \hat{\tau}^2(X_i; \mathcal{S}^{tr}, \Pi) \\ &-2 \hat\tau(X_i; \mathcal{S}^{tr}, \Pi) \hat{\tau}_{HL}(X_i; \mathcal{S}^{tr}, \Pi),
-\end{align}
-
-\begin{align}
-\widehat{\operatorname{LMS}}_\tau (\mathcal{S}^{tr}, \mathcal{S}^{tr}, \Pi) =\underset{i \in \mathcal{S}^{tr}}{\operatorname{med}}\thinspace [(Y_i -& \hat{\mu}(D_i, X_i; \\ & \mathcal{S}^{tr}, \Pi))^2].
-\end{align}
-
-
-
-
-
+</font>
 
 <div id="refs"></div>
 
