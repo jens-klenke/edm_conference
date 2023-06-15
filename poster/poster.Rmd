@@ -17,8 +17,8 @@ author:
     affil: (1)
 affiliation:
   - num: (1)
-    address: Chair of Econometrics, University of Duisburg-Essen; Germany
-column_numbers: 3
+    address: University of Duisburg-Essen; Germany
+column_numbers: 2
 logoright_name: http&#58;//uni-due.de/imperia/md/images/offen_im_denken/signet_ude_rgb_neg.png
 bibliography: "../resources/library.bib"
 primary_colour: "#004c93"
@@ -86,43 +86,31 @@ knitr::opts_chunk$set(echo = FALSE)
 source(here::here('resources/packages.R'))
 ```
 
-# Introduction
 
-
-During the COVID-19 pandemic, we recognized the challenge universities faced transitioning to online classes and exams, especially given the limitations of proctoring due to privacy regulations. Recognizing the limitations in preventing illicit collaboration during online exams, we decided to propose a data-driven method to identify potential collusion among students post-exam. We developed a method using an alternative distance measure and hierarchical clustering algorithms to pinpoint groups of students with remarkably similar exam results. Our method builds upon previous research that used exam event logs to detect collusion. Additionally, we present an approach to categorize groups as "outstandingly similar" using a proctored comparison group, with further details about our methodology and results provided in the subsequent sections of our paper.
-
-
-# Related work
-
-There is a scarcity of research focusing on unproctored exams at universities prior to the COVID-19 pandemic. A method for detecting collusion in such unproctored exams using event logs has been proposed by `r Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))`. A number of previous studies have concentrated on similarity measures for programming exams based on keyboard patterns, as can be seen in works by `r Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))` and `r Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))`. However, other literature, such as `r Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 2))`, primarily relies on surveys or interviews, consequently lacking concrete student behavior data concerning collusion. A few studies suggest that unsupervised online exams could possibly lead to an increase in collusion. Notably, `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))` utilized GPA and final exam scores to analyze potential collusion, however, they did not utilize data collected during the exam itself.
 
 
 # Methodology
 
-The study utilized data from the Descriptive Statistics course at the University Duisburg-Essen, Germany, comparing a test group, which took an unproctored exam at home during the COVID-19 pandemic, to a comparison group that had a proctored exam in class prior to the pandemic. Both groups' exams encompassed arithmetical problems, R programming tasks, and a short essay task. During the exams, students' activities and time stamps were recorded in event logs, and the points achieved per task were noted. The dataset was cleaned to remove students with minimal participation or achievement and those who experienced internet issues, ensuring the comparability of both groups, despite the differing exam formats, as they shared similar content and learning goals.
+* The study analyzed data from the "Descriptive Statistics" course at the University Duisburg-Essen, Germany, with the intent to compare the outcomes of an unproctored exam during the COVID-19 pandemic with a proctored exam held in-person before the pandemic.
+* The two groups' exams involved solving arithmetical problems, completing R programming tasks, and writing a short essay. During the exam process, student activities and time stamps were tracked in event logs, and the points achieved for each task were recorded.
+* The dataset was cleaned to ensure comparability by removing students with minimal participation or achievement, as well as those who encountered internet issues.
+* The study utilized an agglomerative (bottom-up) hierarchical clustering  algorithm that can be described by following equation:
 
 
-The agglomerative (bottom-up) hierarchical clustering algorithm can be described by following equations:
-
-
-<div style="margin-top: -70px;">
+<div style="margin-top: -20px;">
 $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
 </div>
-
-<div style="margin-top: -40px;">
-
-$D(x_i, x_{i'})$ is the global pairwise dissimilarity, while $d_j(x_{ij}, x_{i'j})$ denotes the pairwise attribute dissimilarity. The weights $w_j$ sum up to 1. Index $i$ denotes the number of Students ($N = 151$)$i = 1, ..., N$ with $N = 151$ students, while $j$ is the index for each of the $h$ attributes.
-
+<div style="margin-top: -20px;">
 </div>
 
+* $D(x_i, x_{i'})$ is the global pairwise dissimilarity, while $d_j(x_{ij}, x_{i'j})$ denotes the pairwise attribute dissimilarity. The weights $w_j$ sum up to 1. Index $i$ denotes the number of Students $i = 1, ..., N$ with $N = 151$ students, while $j$ is the index for each of the $h$ attributes.
+* We compared two different kinds of attributes, namely the dissimilarities in the student´s event patters (time of submission) defined as $d_j^L(v_{ij}, v_{i'j})$ and the dissimilarities in points achieved $d_j^P(s_{ij}, s_{i'j})$.
 
-We compared two different kinds of attributes, namely the dissimilarities in the student´s event patters (time of submission) defined as $d_j^L(v_{ij}, v_{i'j})$ and the dissimilarities in points achieved $d_j^P(s_{ij}, s_{i'j})$.
 
+<div style="margin-top: -20px;">
 
-<div style="margin-top: -100px;">
-<small> 
 $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))$$
-</small>
+
 </div>
 
 <div style="margin-top: -20px;">
@@ -133,47 +121,53 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 
 # Empirical results
 
-```{r, out.width="100%", fig.align="center", fig.cap=c("Dendogram produced by average linkage clustering of the proctored control group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/dendogram_control.png'))
-#95% geht
+```{r, out.width="90%", fig.align="center", fig.cap=c("Eevent logs and achieved points of the cluster <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/group_B.png'))
+#png ratio 1400 750
+
 ```
 
-Figure 1 displays the dendrogram of the proctored exam, which we used as a control group to establish a baseline for comparison. This dendrogram provides a visualization of what to expect without any collusion. Figure 2 depicts the test group, in which students were allowed to participate in the exam from home. The dendrogram of the test group reveals a lower overall level of dissimilarity compared to the control group. Notably, the six clusters with the lowest dissimilarity, labeled A-F, stand out significantly from the rest of the cohort.
+* Figure 1 illustrates the individual comparison of achieved points and event logs of the student cluster with the highest similarity.
+* Figure 2 represents the dendrogram of the test group where students took the exam from home.
+* The dendrogram of the test group displays a lower overall level of dissimilarity compared to the comparison group, suggesting possible collusion.
+* Six clusters within the test group, labeled <strong>A-F</strong>, show significantly lower dissimilarity, standing out noticeably from the rest of the cohort.
+
 
 
 ```{r, out.width="100%", fig.align="center", fig.cap=c("Dendogram produced by average linkage clustering of the unproctored test group (2020/21). <strong> A-F </strong> mark the clusters with the lowest dissimilarity."), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
-
-```
-
-A comparison of the normalized distributions of the dissimilarities measures (figure 3) further shows, that 3 points from the test group are considerably distinct from the rest of the data points, which are marked by a red circle.
-
-```{r, out.width="90%", out.height="60%", fig.align="center", fig.cap=c("Comparison of the  normalised distance measures."), echo=FALSE}
-
-knitr::include_graphics(here::here('resources/graphics/boxplot2.png'))
+knitr::include_graphics(here::here('resources/graphics/dendogram_new.png'))
 
 ```
 
 
-```{r, out.width="100%", fig.align="center", fig.cap=c("Comparison of the event logs and achieved points of the clusters <strong>E</strong> and <strong>F</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/plot_ef.png'))
-#png ratio 1400 750
+* Figure 3 compares the normalized distributions of the dissimilarity measures between the comparison and test groups.
+* Three data points from the test group are markedly distinct from the rest of the data points.
+
+
+```{r, out.width="90%", fig.align="center", fig.cap=c("Comparison of the  normalised distance measures."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/Rplot09.png'))
 
 ```
 
 # Discussion
 
-In our discussion, we interpret the results of hierarchical clustering algorithms which are visually represented through a dendrogram, a tree-like structure. After comparing various algorithms, we find average linkage clustering to be the most fitting for our analysis, helping us identify compact clusters, notably clusters A, B, and E, indicative of no larger group collusion. Additional visual tools like scatterplots and barcharts aid in examining student similarities within these clusters. The comparison with a reference group supports the effectiveness of our method in detecting collusion, but limitations exist due to the unknown ground truth. Despite this, our approach not only helps deter cheating in unproctored exams but also contributes to the broader digital transformation of education, preparing us for any unforeseen future challenges similar to the COVID-19 pandemic.
+* The study discusses the results of hierarchical clustering algorithms, visually represented via a dendrogram, a tree-like structure.
+* Various clustering algorithms were compared, and average linkage clustering was found to be the most suitable for the analysis.
+* The use of average linkage clustering helped identify compact clusters (specifically clusters **A**, **B**, and **E**), suggesting a lack of large group collusion.
+* Additional visual tools like scatterplots and bar charts were employed to examine similarities among students within these clusters.
+* The study used a reference group for comparison, validating the method's effectiveness in detecting collusion, though limitations exist due to unknown ground truth.
+* The approach not only aids in deterring cheating in unproctored exams but also contributes to the broader digital transformation of education, equipping us to handle unforeseen future challenges similar to the COVID-19 pandemic.
 
 
 # Further research
 
-Future studies might focus on  exploring the long-term effectiveness of the detection method in deterring students from colluding in exams, and its impact on academic integrity and student behavior. Also, the development and implementation of methods to collect and analyze complementary evidence, might be interesting for further research, with the aim of improving detection rates and understanding the extent of collusion among students.
-
-
+* Future research could assess the long-term efficacy of the collusion detection method during exams and its impact on academic integrity and student behavior.
+* Additional studies might focus on refining methods for gathering and analyzing supplementary evidence, with the ultimate goal of improving collusion detection rates. These efforts aim to provide a better understanding of the prevalence and extent of student collusion.
 
 # References
 
