@@ -91,7 +91,7 @@ source(here::here('resources/packages.R'))
 
 # Methodology
 
-* The study analyzed data from the "Descriptive Statistics" course at the University Duisburg-Essen, Germany, with the intent to compare the outcomes of an unproctored exam during the COVID-19 pandemic with a proctored exam held in-person before the pandemic.
+* The study analyzed data from the "Descriptive Statistics" course at the University Duisburg-Essen, Germany, with the intent to compare the outcomes of an unproctored exam ($N=151$) during the COVID-19 pandemic with a proctored exam ($N=109$) held in-person before the pandemic.
 * The two groups' exams involved solving arithmetical problems, completing R programming tasks, and writing a short essay. During the exam process, student activities and time stamps were tracked in event logs, and the points achieved for each task were recorded.
 * The dataset was cleaned to ensure comparability by removing students with minimal participation or achievement, as well as those who encountered internet issues.
 * The study utilized an agglomerative (bottom-up) hierarchical clustering  algorithm that can be described by following equation:
