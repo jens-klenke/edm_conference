@@ -382,7 +382,7 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
 .pull-left[
 ```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("<strong>Figure 3.1:</strong> Comparison of the non-normalised distance measures."), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/boxplot1.png'))
+knitr::include_graphics(here::here('resources/graphics/boxplot_original.png'))
 
 ```
 
@@ -392,7 +392,7 @@ knitr::include_graphics(here::here('resources/graphics/boxplot1.png'))
 .pull-right[
 ```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("<strong>Figure 3.2:</strong> Comparison of the  normalised distance measures."), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/boxplot2.png'))
+knitr::include_graphics(here::here('resources/graphics/boxplot_comparison.png'))
 
 ```
 ]
