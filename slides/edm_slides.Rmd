@@ -392,7 +392,7 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_original.png'))
 .pull-right[
 ```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("<strong>Figure 3.2:</strong> Comparison of the  normalised distance measures."), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/boxplot_comparison.png'))
+knitr::include_graphics(here::here('resources/graphics/boxplot_norm.png'))
 
 ```
 ]
