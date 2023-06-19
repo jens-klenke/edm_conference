@@ -28,7 +28,7 @@ poster_height: "46.8in"
 output:  
   posterdown::posterdown_html:
     self_contained: true
-#knit: pagedown::chrome_print
+knit: pagedown::chrome_print
 ---
 
 <style>
@@ -169,6 +169,7 @@ knitr::include_graphics(here::here('resources/graphics/Rplot09.png'))
 * Future research could assess the long-term efficacy of the collusion detection method during exams and its impact on academic integrity and student behavior.
 * Additional studies might focus on refining methods for gathering and analyzing supplementary evidence, with the ultimate goal of improving collusion detection rates. These efforts aim to provide a better understanding of the prevalence and extent of student collusion.
 
+<!--
 # References
 
 
@@ -183,5 +184,5 @@ PrintBibliography(my_bib, .opts = list(style = "text", "max.names" = 100), start
 
 <div id="refs"></div>
 
-
+-->
 

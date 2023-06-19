@@ -263,6 +263,20 @@ tr:first-child th, tr:first-child td {
 </body>
 </html>
 
+---
+# new table 
+
+```{r structure and lm, echo = FALSE, include=FALSE}
+# table  
+groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
+
+
+knitr::kable(groups, digits = 4, caption = '\\label{tab:sum_lm} Summary of the linear model', format.args = list(decimal.mark = '.', big.mark = " "),   booktabs = TRUE, linesep = "")%>%
+  kable_styling(latex_options = c("striped", "hold_position"))
+
+```
+
+
 
 ---
 
