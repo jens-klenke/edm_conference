@@ -26,9 +26,9 @@ h1, h2, h3, h4 {
   font-size: 95%;
 }
 
-.hljs-github .hljs {
+/* .hljs-github .hljs {
   overflow-y: auto;
-}
+} */
 
 .remark-code-line {
   font-size: 80%;

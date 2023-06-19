@@ -2,7 +2,7 @@
 title: "A Data Mining Approach for Detecting Collusion in Unproctored Online Exams<br>"
 subtitle: ""
 author: ""
-date: "11-24 July, 2023"
+date: "11-14 July, 2023"
 location: "Bangalore"
 output:
   xaringan::moon_reader:
@@ -105,14 +105,14 @@ $\quad$
 ---
 name: introduction
 
-<h1> Introduction </h1>
+# Introduction
 
-* COVID-19 forced universities to switch to online classes and exams.
-* Proctoring online exams with video conference software was often prohibited due to data protection regulations and economically unfeasible.
-* In this case study take-home exams were conducted as open-book, but collaboration was strictly prohibited.
-* Hierarchical clustering algorithms were used to identify groups of potentially colluding students.
-* The method successfully found groups with nearly identical exams.
-* A proctored comparison group helped categorize student groups as "outstandingly similar".
+* COVID-19 forced universities to switch to online classes and exams
+* Proctoring online exams with video conference software was often prohibited due to data protection regulations and economically unfeasible
+* In this case study take-home exams were conducted as open-book, but collaboration was strictly prohibited
+* Hierarchical clustering algorithms were used to identify groups of potentially colluding students
+* The method successfully found groups with nearly identical exams
+* A proctored comparison group helped categorize student groups as "outstandingly similar"
 
 
 
@@ -133,12 +133,17 @@ name: related_work
 
 <h1> Related work </h1>
 
-* Limited research exists on unproctored exams at universities prior to the pandemic.
-* `r Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))` propose a method using event logs to detect collusion in unproctored exams.
-* Previous studies focused on similarity measures for programming exams based on keyboard patterns, e.g. `r Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))` and `r Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))`.
-* Other literature (e.g. `r Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 2))`) relies on surveys or interviews, lacking actual student behavior data on collusion.
-* Some studies suggest that unsupervised online exams may lead to collusion.
-* `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))` used GPA and final exam scores to analyze collusion but not data collected during the exam.
+* Limited research exists on unproctored exams at universities prior to the pandemic
+* `r Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))` propose a method using event logs to detect collusion in unproctored exams
+* Previous studies focused on similarity measures for programming exams based on keyboard patterns, e.g. `r Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))` and `r Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))`
+* Other literature (e.g. `r Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 2))`) relies on surveys or interviews, lacking actual student behavior data on collusion
+* Some studies suggest that unsupervised online exams may lead to collusion
+* `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))` used GPA and final exam scores to analyze collusion but not data collected during the exam
+
+.blockquote[
+* Our goal is to use this method for statistical courses and strengthen the analysis with a comparison group
+
+]
 
 
 
@@ -147,132 +152,31 @@ name: methodology
 
 <h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
 
-* Data for the study was collected from the *Descriptive Statistics* course at the University Duisburg-Essen, Germany.
-* The test group took the unproctored exam at home during the COVID-19 pandemic, while the comparison group took a proctored exam in class before the pandemic.
-* The exams consisted of arithmetical problems, programming tasks in `R`, and a short essay task.
-* Event logs captured students' activities and time stamps during the exams, and points achieved per task were recorded.
-* Data cleaning was conducted, removing students with minimal participation or achievement, as well as those with reported internet problems.
-* Despite differences in exam format, both groups shared similar content and learning goals, with opportunities for questions and discussions.
+* Data for the study was collected from the *Descriptive Statistics* course at the University Duisburg-Essen, Germany
+* The exams consisted of arithmetical problems, programming tasks in the statistical programming language `R`, and a short essay task
+* Both exams were conducted digital with the e-assement system [JACK](https://www.uni-due.de/zim/services/jack.php) 
+  - Event logs captured students' activities and time stamps during the exams, and points achieved per task were recorded
+* The test group took the unproctored exam at home during the COVID-19 pandemic, while the comparison group took a proctored exam in the facilities of the university
+* Data cleaning was conducted, removing students with minimal participation or achievement
+* The difference between the two courses is marginal; the course content and objectives, as well as the course structure, have not changed notably over time 
 ---
-
-
-```{r, echo = FALSE, warning = FALSE, eval=FALSE}
-DiagrammeR::grViz("digraph {
-  graph [layout = dot, rankdir = TB, overlap = true, fontsize = 10]
-  
-  node [shape = rectangle]        
-  x1 [label = 'Comparison group (2018/2019)']
-  x2 [label = 'Test group (2020/2021)']
-  
-      node [shape = rectangle, style = dotted]        
-
-  
-    node [shape = oval, width = 0.9]        
-  a1 [label = 'N = 109']
-  a2 [label = 'N = 151']
-
-  
-      node [shape = diamond, width = 0.9]        
-  
-
-
-  # edge definitions with the node IDs
-  
-  
-  edge [style=dotted]
-  x1 <-> x2
-  x1 -> a1
-  x2 -> a2
-
-  
-  
-  }",
-  height = 500,
-  width = 1000)
-```
-
-
 
 <h1> Methodology — <span style="font-size: 0.8em;"> Data set </span> </h1>
 
 <br>
-<br>
 
-
-<html>
-<style>
-table {
-  border-collapse: collapse;
-}
-table, th, td {
-  text-align: center;
-}
-th, td {
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-}
-th:first-child, td:first-child {
-  border-right: 2px solid black;
-}
-tr:first-child th, tr:first-child td {
-  border-bottom: 2px solid black;
-}
-</style>
-<body>
-
-<h2> </h2>
-
-<table style="width:100%">
-  <tr>
-    <th> </th>
-    <th>Comparison group</th>
-    <th>Test group</th>
-  </tr>
-  <tr>
-    <th>Year</th>
-    <td>2018/2019</td>
-    <td>2020/2021</td>
-  </tr>
-  <tr>
-    <th>N</th>
-    <td>109</td>
-    <td>151</td>
-  </tr>
-    <tr>
-    <th>Style</th>
-    <td>proctored (in class)</td>
-    <td>unproctored (at home)</td>
-  </tr>
-    <tr>
-    <th>Total points</th>
-    <td>60</td>
-    <td>60</td>
-  </tr>
-    <tr>
-    <th>Sub tasks</th>
-    <td>19</td>
-    <td>17</td>
-  </tr>
-    <tr>
-    <th>Minutes</th>
-    <td>60</td>
-    <td>60</td>
-  </tr>
-</table>
-
-</body>
-</html>
-
----
-# new table 
-
-```{r structure and lm, echo = FALSE, include=FALSE}
+```{r table, echo = FALSE, message = FALSE, warning = FALSE}
 # table  
 groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
 
 
-knitr::kable(groups, digits = 4, caption = '\\label{tab:sum_lm} Summary of the linear model', format.args = list(decimal.mark = '.', big.mark = " "),   booktabs = TRUE, linesep = "")%>%
-  kable_styling(latex_options = c("striped", "hold_position"))
+knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc')) %>%
+#  kable_styling(bootstrap_options = c("striped", "bordered")) %>%
+  row_spec(0, bold = TRUE, hline_after = TRUE, background = '#ffffff') %>%
+  column_spec(1, bold = TRUE, width_min = "10em") %>%
+  add_header_above(c('$$$$', 'Groups' =2), line = TRUE, background = c('#ffffff', '#ffffff'))
+#   kableExtra::kable_classic_2(full_width = F)
+
 
 ```
 
@@ -283,14 +187,15 @@ knitr::kable(groups, digits = 4, caption = '\\label{tab:sum_lm} Summary of the l
 <h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
 
 * Agglomerative (bottom-up) hierarchical clustering algorithm
-* Global pairwise dissimilarities
+* Global pairwise dissimilarities $D(x_i, x_{i'})$
 
 $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j}) \quad with \quad \sum_{j=1}^h w_j = 1$$
-* $D(x_i, x_{i'})$: Global pairwise dissimilarity
-* $d_j(x_{ij}, x_{i'j})$: Pairwise attribute dissimilarity
-* $i = 1, ..., N$ with $N = 151$ students
-* $j = 1, ..., h$ attributes
-* We compared two different kinds of attributes:
+* With 
+  * $d_j(x_{ij}, x_{i'j})$ pairwise attribute dissimilarity
+  * $i = 1, ..., N$ students
+  * $j = 1, ..., h$ attributes
+
+* We compared two different kinds of attributes
   * Dissimilarities in the student´s event patters (time of submission)
   * Dissimilarities in points achieved
   
@@ -298,12 +203,14 @@ $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j}) \quad
 
 <h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
 
-### Dissimilarities in the student´s event patters (time of submission)
+<br>
+
+Dissimilarities in the student´s event patters (time of submission) for each task $j$  
 
 * $d_j^L(v_{ij}, v_{i'j})$ with weights $w_j^L$
-* We divided the examination into $m = 1, ... , 70$ intervals, since both exams took $70$ min.
-* $v_{ijm}$ denotes the count of answers of student $i$ during the $m$-th interval.
-* Manhatten metric used for calculation of the pairwise attribute dissimilarity.
+* We divided the examination into $m = 1, ... , 70$ intervals
+* $v_{ijm}$ denotes the count of answers of student $i$ for task $j$ in the $m$-th interval
+* Manhatten metric used for calculation of the pairwise attribute dissimilarity
 
 $\quad$
   
@@ -313,11 +220,13 @@ $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
   
 <h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
   
-### Dissimilarities in points achieved
+<br>
+
+Dissimilarities in points achieved for each task $j$  
 
 * $d_j^P(s_{ij}, s_{i'j})$ with weights $w_j^P$
-* $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th sub task.
-* Absolute difference used as dissimilarity measure.
+* $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th sub task
+* Absolute difference used as dissimilarity measure
 
 $\quad$
   
@@ -332,20 +241,18 @@ $$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
 
 ### Full model
 
-$$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))
+$$D(s_i, s_{i'}, v_i, v_{i'}) = \dfrac{1}{h} \sum_{j=1}^h \left(w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}) \right)
 \quad \text{with} \quad \sum_{j=1}^h w_j^P + w_j^L =1$$
 
-* Weights $w_j$ control the influence each attribute on the global object dissimilarity.
-* We reduced the weights for: 
+* Weights $w_j$ control the influence of each attribute on the global object dissimilarity
+* We reduced the weights for
   * `R`-tasks and free-text questions, since the event log might not be comparable in these cases
   * Points achieved
-* Since dissimilarity measures depend on scale, the attributes were normalized.
+* Since dissimilarity measures depend on scale, the attributes were normalized
 
 ---
 
 <h2>Empirical results — <span style="font-size: 0.8em;">Dendogram</span></h2>
-
-
 
 
 ```{r xaringan-panelset, echo=FALSE}

@@ -453,7 +453,7 @@ blockquote, .blockquote {
 
 .blockquote p {
   margin-top: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 .blockquote > h1:first-of-type {
   margin-top: 0px;
@@ -512,6 +512,35 @@ vertical-align: middle;
 
 .padding_left_2 {
   padding-left: 50px;
+}
+
+.remark-slide tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+th:empty-cells{
+  background-color: #ffffff;
+}
+
+.td:empty{
+    background-color: red;
+}
+
+th:empty{
+    background-color: red;
+}
+
+
+empty{
+    background-color: red;
+}
+
+.th{
+  background-color: #ffffff;
+}
+
+.element.style {
+  background-color: #ffffff !important; 
 }
 
 /* if wanted to change mathjax formatting
