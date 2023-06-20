@@ -7,13 +7,13 @@ author:
     affil: (1)
   - name: J. Klenke
     affil: (1)
+  - name: N. Reckmann
+    affil: (1)
   - name: M. Striewe
     affil: (1)
   - name: M. Goedicke 
     affil: (1) 
   - name: <br> C. Hanck
-    affil: (1)
-  - name: N. Reckmann
     affil: (1)
 affiliation:
   - num: (1)

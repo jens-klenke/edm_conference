@@ -4,7 +4,7 @@
     <title>A Data Mining Approach for Detecting Collusion in Unproctored Online Exams </title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <script src="edm_slides_files/header-attrs-2.18/header-attrs.js"></script>
+    <script src="edm_slides_files/header-attrs-2.14/header-attrs.js"></script>
     <link href="edm_slides_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <script src="edm_slides_files/xaringanExtra-progressBar-0.0.1/progress-bar.js"></script>
     <script src="edm_slides_files/clipboard-2.0.6/clipboard.min.js"></script>
@@ -69,7 +69,7 @@ class: title-slide
 
 
 .padding_left.pull-down.white[
-J. Langerbein, T. Massing, .bold[_J. Klenke_],  M. Striewe, M. Goedicke, C. Hanck, N. Reckmann
+J. Langerbein, T. Massing, .bold[_J. Klenke_],  N. Reckmann, M. Striewe, M. Goedicke, C. Hanck
 &lt;br&gt;
 &lt;br&gt;
 &lt;br&gt;
@@ -95,13 +95,14 @@ name: introduction
 
 # Introduction
 
-* COVID-19 forced universities to switch to online classes and exams
-* Proctoring online exams with video conference software was often prohibited due to data protection regulations and economically unfeasible
-* In this case study take-home exams were conducted as open-book, but collaboration was strictly prohibited
-* Hierarchical clustering algorithms were used to identify groups of potentially colluding students
-* The method successfully found groups with nearly identical exams
-* A proctored comparison group helped categorize student groups as "outstandingly similar"
+* COVID-19 forced universities to switch to online exams
+* Proctoring online exams with video conference software is prohibited in the EU by GDPR
+* In this case take-home exams were conducted as open-book, but collaboration was strictly prohibited
+* Hierarchical clustering algorithms are used to identify groups of potentially colluding students
+* The method successfully finds groups with nearly identical behaviour in the exams
+* A proctored comparison group helps categorize students as _uncommonly similar_ 
 
+&lt;!-- outstandingly --&gt;
 
 
 
@@ -112,30 +113,39 @@ name: related_work
 
 &lt;h1&gt; Related work &lt;/h1&gt;
 
-* Limited research exists on unproctored exams at universities prior to the pandemic
+.font80[
+* Limited research exists on unproctored exams at universities 
+
+&lt;!-- prior to the pandemic --&gt; 
+
 * &lt;a href='#bib-cleophas2021s'&gt;Cleophas et al. (2021)&lt;/a&gt; propose a method using event logs to detect collusion in unproctored exams
 * Previous studies focused on similarity measures for programming exams based on keyboard patterns, e.g. &lt;a href='#bib-Hellas_2017'&gt;Hellas et al. (2017)&lt;/a&gt; and &lt;a href='#bib-Leinonen_2016'&gt;Leinonen et al. (2016)&lt;/a&gt;
 * Other literature (e.g. &lt;a href='#bib-hemming2010online'&gt;Hemming (2010)&lt;/a&gt;) relies on surveys or interviews, lacking actual student behavior data on collusion
 * Some studies suggest that unsupervised online exams may lead to collusion
-* &lt;a href='#bib-hollister2009proctored'&gt;Hollister and Berenson (2009)&lt;/a&gt; used GPA and final exam scores to analyze collusion but not data collected during the exam
-
-.blockquote[
-* Our goal is to use this method for statistical courses and strengthen the analysis with a comparison group
+* &lt;a href='#bib-hollister2009proctored'&gt;Hollister and Berenson (2009)&lt;/a&gt; used GPA and final exam scores to analyze collusion but no data collected during the exam
 
 ]
 
+--
 
+.blockquote[
+&lt;svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;fill:#004c93;" xmlns="http://www.w3.org/2000/svg"&gt;  &lt;path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm-28.9 143.6l75.5 72.4H120c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24h182.6l-75.5 72.4c-9.7 9.3-9.9 24.8-.4 34.3l11 10.9c9.4 9.4 24.6 9.4 33.9 0L404.3 273c9.4-9.4 9.4-24.6 0-33.9L271.6 106.3c-9.4-9.4-24.6-9.4-33.9 0l-11 10.9c-9.5 9.6-9.3 25.1.4 34.4z"&gt;&lt;/path&gt;&lt;/svg&gt; **Aim of the Paper**
+
+Use hierarchical clustering algorithm on event logs of our statistical exam and strengthen the analysis with a comparison to a proctored exam group
+]
 
 ---
 name: methodology
 
 &lt;h1&gt; Methodology — &lt;span style="font-size: 0.8em;"&gt; Model &lt;/span&gt; &lt;/h1&gt;
 
-* Data for the study was collected from the *Descriptive Statistics* course at the University Duisburg-Essen, Germany
+* Data for the study was collected from the *Descriptive Statistics* course at the University of Duisburg-Essen, Germany
 * The exams consisted of arithmetical problems, programming tasks in the statistical programming language `R`, and a short essay task
-* Both exams were conducted digital with the e-assement system [JACK](https://www.uni-due.de/zim/services/jack.php) 
+* Both exams were conducted digital with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php) 
+  - Each student was given different randomized numerical values across all tasks
   - Event logs captured students' activities and time stamps during the exams, and points achieved per task were recorded
-* The test group took the unproctored exam at home during the COVID-19 pandemic, while the comparison group took a proctored exam in the facilities of the university
+* The test group took the unproctored exam at home during the COVID-19 pandemic
+* the comparison group took a proctored exam in the facilities of the university
 * Data cleaning was conducted, removing students with minimal participation or achievement
 * The difference between the two courses is marginal; the course content and objectives, as well as the course structure, have not changed notably over time 
 ---
@@ -429,19 +439,24 @@ name: references
 
 .font80[
 
-Cleophas, C., C. Hoennige, F. Meisel, and P. Meyer (2021). "Who's Cheating? Mining Patterns of Collusion from Text and Events in Online Exams". In:
-_Mining Patterns of Collusion from Text and Events in Online Exams (April 12, 2021)_.
+Cleophas, C., C. Hoennige, F. Meisel, and P. Meyer (2021). "Who's Cheating? Mining Patterns of
+Collusion from Text and Events in Online Exams". In: _Mining Patterns of Collusion from Text and Events
+in Online Exams (April 12, 2021)_.
 
-Hellas, A., J. Leinonen, and P. Ihantola (2017). _Plagiarism in Take-Home Exams: Help-Seeking, Collaboration, and Systematic Cheating_. ITiCSE '17.
-Bologna, Italy: Association for Computing Machinery, p. 238–243. ISBN: 9781450347044. DOI: 10.1145/3059009.3059065.
+Hellas, A., J. Leinonen, and P. Ihantola (2017). _Plagiarism in Take-Home Exams: Help-Seeking,
+Collaboration, and Systematic Cheating_. ITiCSE '17. Bologna, Italy: Association for Computing
+Machinery, p. 238–243. ISBN: 9781450347044. DOI: 10.1145/3059009.3059065.
 &lt;https://doi.org/10.1145/3059009.3059065&gt;.
 
-Hemming, A. (2010). "Online tests and exams: lower standards or improved learning?" In: _The Law Teacher_ 44.3, pp. 283-308.
+Hemming, A. (2010). "Online tests and exams: lower standards or improved learning?" In: _The Law
+Teacher_ 44.3, pp. 283-308.
 
-Hollister, K. K. and M. L. Berenson (2009). "Proctored versus unproctored online exams: Studying the impact of exam environment on student performance".
-In: _Decision Sciences Journal of Innovative Education_ 7.1, pp. 271-294.
+Hollister, K. K. and M. L. Berenson (2009). "Proctored versus unproctored online exams: Studying the
+impact of exam environment on student performance". In: _Decision Sciences Journal of Innovative
+Education_ 7.1, pp. 271-294.
 
-Leinonen, J., K. Longi, A. Klami, A. Ahadi, and A. Vihavainen (2016). _Typing patterns and authentication in practical programming exams_ , pp. 160-165.
+Leinonen, J., K. Longi, A. Klami, A. Ahadi, and A. Vihavainen (2016). _Typing patterns and
+authentication in practical programming exams_ , pp. 160-165.
 ]
 
 
