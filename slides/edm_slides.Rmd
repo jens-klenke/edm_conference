@@ -21,7 +21,7 @@ output:
         scroll: TRUE #disable slide transitions by scrolling
 ---
 class: title-slide  
-```{r, load_refs, include = FALSE, echo=FALSE, cache=FALSE}
+```{r, load_refs_1, include = FALSE, echo=FALSE, cache=FALSE}
 # packages
 source(here::here('resources/packages.R'))
 
@@ -48,6 +48,11 @@ my_bib <- ReadBib(here::here("resources/library.bib"), check = FALSE)
 #RefManageR::NoCite(my_bib, "Huntington-Klein2022")
 
 
+```
+
+```{r moon_reader, include = FALSE, eval = FALSE}
+options(servr.interval = 0.5)
+xaringan::inf_mr()
 ```
 
 ```{r xaringanExtra_progress-bar, echo = FALSE}
@@ -113,7 +118,7 @@ name: introduction
 
 * COVID-19 forced universities to switch to online exams
 * Proctoring online exams with video conference software is prohibited in the EU by GDPR
-* In this case take-home exams were conducted as open-book, but collaboration was strictly prohibited
+* In this case take-home exams are conducted as open-book, but collaboration is strictly prohibited
 * Hierarchical clustering algorithms are used to identify groups of potentially colluding students
 * The method successfully finds groups with nearly identical behaviour in the exams
 * A proctored comparison group helps categorize students as _uncommonly similar_ 
@@ -153,26 +158,27 @@ name: related_work
 
 --
 
-.blockquote[
+.pull-down.blockquote[
 `r arrow_blue` **Aim of the Paper**
 
-Use hierarchical clustering algorithm on event logs of our statistical exam and strengthen the analysis with a comparison to a proctored exam group
+Categorize students with hierarchical clustering algorithm on event logs of our statistical exam and strengthen the analysis with a comparison to a proctored exam group
 ]
 
 ---
 name: methodology
 
-<h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
+<h1> Methodology — <span style="font-size: 0.8em;"> Set-up </span> </h1>
 
-* Data for the study was collected from the *Descriptive Statistics* course at the University of Duisburg-Essen, Germany
-* The exams consisted of arithmetical problems, programming tasks in the statistical programming language `R`, and a short essay task
-* Both exams were conducted digital with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php) 
-  - Each student was given different randomized numerical values across all tasks
-  - Event logs captured students' activities and time stamps during the exams, and points achieved per task were recorded
+* Data for the study are collected from the *Descriptive Statistics* course at the University of Duisburg-Essen, Germany
+* The exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
+* Both exams are conducted digital with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php) 
+  - Each student receives different randomized numerical values across all tasks
+  - Event logs capture students' activities, time stamps, and points during the exams for every subtask
 * The test group took the unproctored exam at home during the COVID-19 pandemic
-* the comparison group took a proctored exam in the facilities of the university
-* Data cleaning was conducted, removing students with minimal participation or achievement
-* The difference between the two courses is marginal; the course content and objectives, as well as the course structure, have not changed notably over time 
+  * The comparison group took a proctored exam in the facilities of the university
+* Data cleaning is conducted, removing students with minimal participation or achievement and students with internet problems
+* The difference between the two courses is marginal
+
 ---
 
 <h1> Methodology — <span style="font-size: 0.8em;"> Data set </span> </h1>
@@ -201,35 +207,43 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'))
 <h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
 
 * Agglomerative (bottom-up) hierarchical clustering algorithm
-* Global pairwise dissimilarities $D(x_i, x_{i'})$
+* Global pairwise dissimilarities: 
 
-$$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j}) \quad with \quad \sum_{j=1}^h w_j = 1$$
+$$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
+.font80[
 * With 
+  * $\displaystyle \sum_{j=1}^h w_j = 1$
   * $d_j(x_{ij}, x_{i'j})$ pairwise attribute dissimilarity
   * $i = 1, ..., N$ students
   * $j = 1, ..., h$ attributes
+]
 
-* We compared two different kinds of attributes
-  * Dissimilarities in the student´s event patters (time of submission)
+--
+
+.font80[
+* We compare two different kinds of attributes
+  * Dissimilarities in the student´s event patterns (time of submission)
   * Dissimilarities in points achieved
-  
+]
+
 ---
 
 <h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
 
 <br>
 
-Dissimilarities in the student´s event patters (time of submission) for each task $j$  
+Dissimilarities in the student´s event patterns (time of submission) for each task $j$  
 
-* $d_j^L(v_{ij}, v_{i'j})$ with weights $w_j^L$
-* We divided the examination into $m = 1, ... , 70$ intervals
-* $v_{ijm}$ denotes the count of answers of student $i$ for task $j$ in the $m$-th interval
-* Manhatten metric used for calculation of the pairwise attribute dissimilarity
-
-$\quad$
-  
 $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
-  
+
+
+* With 
+  * Examination is devided into $m = 1, ... , 70$ time intervals
+  * $v_{ijm}$ denotes the count of answers of student $i$ for task $j$ in the $m$-th interval
+  * Manhatten metric is used 
+
+
+
 ---
   
 <h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
@@ -238,31 +252,32 @@ $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
 
 Dissimilarities in points achieved for each task $j$  
 
-* $d_j^P(s_{ij}, s_{i'j})$ with weights $w_j^P$
-* $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th sub task
-* Absolute difference used as dissimilarity measure
-
-$\quad$
-  
 $$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
 
+* With 
+  * $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th sub task
+  * Manhatten metric is used
 
 ---
 
-<h1> Methodology — <span style="font-size: 0.8em;"> Model </span> </h1>
+<h1> Methodology — <span style="font-size: 0.8em;">Full  Model </span> </h1>
 
 
-
-### Full model
-
-$$D(s_i, s_{i'}, v_i, v_{i'}) = \dfrac{1}{h} \sum_{j=1}^h \left(w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}) \right)
-\quad \text{with} \quad \sum_{j=1}^h w_j^P + w_j^L =1$$
+$$D(s_i, s_{i'}, v_i, v_{i'}) = \dfrac{1}{h} \sum_{j=1}^h \left(w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}) \right)$$
 
 * Weights $w_j$ control the influence of each attribute on the global object dissimilarity
-* We reduced the weights for
-  * `R`-tasks and free-text questions, since the event log might not be comparable in these cases
+  * $\displaystyle \sum_{j=1}^h w_j^P + w_j^L =1$
+
+--
+
+* We reduce the weights for
+  * `R`-tasks as these task have more noice
+  * Free-text questions as the comparison on that kind of task is limited
   * Points achieved
-* Since dissimilarity measures depend on scale, the attributes were normalized
+  
+--
+
+* Since dissimilarity measures depend on scale, the attributes are **normalized**
 
 ---
 
@@ -271,21 +286,28 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \dfrac{1}{h} \sum_{j=1}^h \left(w_j^P \cdot d_j^
 
 ```{r xaringan-panelset, echo=FALSE}
 xaringanExtra::use_panelset()
-style_panelset_tabs(foreground = "black", background = "#004c93")
+style_panelset_tabs(active_foreground = '#ffffff',
+                    active_background = '#004c93',
+                    active_border_color = '#004c93',
+                    foreground = '#004c93',
+                    background = '#f5f5f5',
+                    hover_foreground = '#d22' ,
+                    inactive_opacity = 0.25
+                    )
 ```
 
 
-.panelset.sideways[
-.panel[.panel-name[Control group]
+.panelset[
+.panel[.panel-name[Control]
 
-```{r, out.width="150%", fig.align="center", fig.cap=c("<strong> Figure 1: </strong> Dendogram produced by average linkage clustering of the proctored control group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
+```{r, out.width="100%", fig.align="center", fig.cap=c("<strong> Figure 1: </strong> Dendogram produced by average linkage clustering of the proctored control group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/dendogram_control.png'))
 #95% geht
 ```
 ]
 
-.panel[.panel-name[Test group]
+.panel[.panel-name[Test]
 
 ```{r, out.width="100%", fig.align="center", fig.cap=c("<strong>Figure 2:</strong>  Dendogram produced by average linkage clustering of the unproctored test group (2020/21). <strong> A-F </strong> mark the clusters with the lowest dissimilarity."), echo=FALSE}
 
@@ -293,18 +315,16 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
 
 ```
 ]
+
+.panel[.panel-name[Findings]
+
+### Findings
+
+- Lower level of dissimilarity in test group
+- Clusters **A**, **B** and **E** standing out
+
 ]
-
-<h3 style="margin-bottom: -15px;">Results</h3>
-<p style="margin-top: 0; font-size: 70%;">
-<ul>
-    <li>The control group has an overall higher level of dissimilarity and doesn´t contain any strikingly similar cluster.
-    The six lowest cluster from the test group stand out in terms of similarity, specially cluster <strong>A</strong>, <strong>B</strong> and <strong>E</strong>.</li>
-</ul>
-</p>
-
-
-
+]
 
 ---
 
@@ -315,7 +335,7 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
 
 
 .pull-left[
-```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("<strong>Figure 3.1:</strong> Comparison of the non-normalised distance measures."), echo=FALSE}
+```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("<strong>Figure 3.1:</strong> Comparison of the distance measures."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/boxplot_original.png'))
 
@@ -335,17 +355,7 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm.png'))
 
 
 ---
-
-
 <h2>Empirical results — <span style="font-size: 0.8em;">Cluster comparison</span></h2>
-
-
-
-
-```{r xaringan-panelset4, echo=FALSE}
-xaringanExtra::use_panelset()
-style_panelset_tabs(foreground = "white", background = "#004c93")
-```
 
 
 .panelset[
@@ -417,36 +427,43 @@ knitr::include_graphics(here::here('resources/graphics/plot_kl.png'))
 
 
 ---
-
-<h1> Discussion </h1>
-
-* The results of hierarchical clustering algorithms are presented in a dendrogram, providing a visual representation of the clustering results.
-* A dendrogram resembles a tree structure, where objects are merged based on their dissimilarity in a bottom-up approach.
-* Various hierarchical clustering algorithms exist, and the cophenetic correlation coefficient is used to assess how well each algorithm represents the original structure in the data.
-* Average linkage clustering is deemed the most suitable algorithm for the analysis.
-* The dendrogram shows compact clusters at medium dissimilarities, with three notable clusters (**A**, **B**, and **E**) consisting of two students each, indicating the absence of collusion in larger groups.
-* Scatterplots and barcharts are used to examine the similarity of students' chronology and achieved points within clusters.
-
-
----
 name: discussion
-<h1> Discussion </h1>
 
-* Comparison with the results from the comparison group supports the findings, indicating that collusion over the entire exam is unlikely, and the differences between the groups are not coincidental.
-* The method successfully detects at least three clusters with near identical exams.
-* The approach provides a basis for further examination of clusters based on comparison with a reference group, but the ground truth is not known, limiting the certainty of conclusions.
-* Nevertheless, the elevated risk of detection may indeed discourage students from cheating in unproctored exams. 
-* This is not only a important step in adapting to the progressing digitization of education, but it also equips us better for unforeseen situations in the future, much like the COVID-19 pandemic.
+# Discussion
+
+* Dendrogram, providing a visual representation of the clustering results
+* Various hierarchical clustering algorithms exist
+  * The data driven cophenetic correlation coefficient is used to assess the algorithms
+  * Average linkage clustering most suitable 
+* Three notable clusters (**A**, **B**, and **E**) consisting of two students each
+* Collusion in larger groups are not found
+* Notable Clusters are further investigated with scatterplots and barcharts
+
+
+---
+
+# Discussion 
+
+* Comparison with the results from the comparison group supports the findings
+* Method successfully detects at least three clusters with near identical exams
+  * Independent of the linkage method used
+* The approach provides a basis for examination of clusters based on comparison with a reference group
+  * However, the ground truth is not known, limiting the certainty of conclusions
+* Nevertheless, the elevated risk of detection may indeed discourage students from cheating in unproctored exams 
+* Important step in adapting to the progressing of digitization of education
+* Equips us better for unforeseen situations in the future
+  * E.g.: pandemics, climate change impacts
 
 
 
 ---
 
-<h1> Further research </h1>
+# Further research 
 
-* Exploring the long-term effectiveness of the detection method in deterring students from colluding in exams, and its impact on academic integrity and student behavior.
-* Development and implementation of methods to collect and analyze complementary evidence, with the aim of improving detection rates and understanding the extent of collusion among students.
-
+* Investigating long-term effects of collusion analysis on student behavior 
+  * Impact on academic integrity ?
+  * Impact of AI on students collusion behavior? 
+* Development of a (better) decision rule to classify conspicuous clusters
 
 ---
 name: references

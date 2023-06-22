@@ -58,7 +58,10 @@ To specify the margin of the first title h1
 /* use to position text at the bottom */
 .pull-down {
   position: absolute;
-  bottom: 50px;
+  bottom: 75px;
+  right: 50px;
+  left: 50px;
+  padding-right: 50px;
 }
 
 /* Change default inverse background colour */
@@ -81,8 +84,10 @@ To specify the margin of the first title h1
 blockquote, .blockquote {
   display: block;
   margin-top: 0.1em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.02em;
   margin-left: 5px;
+  left: 100px;
+  right: 100px;
   margin-right: 5px;
   border-left: solid 10px #0148A4;
   border-top: solid 2px #0148A4;
@@ -91,7 +96,7 @@ blockquote, .blockquote {
   box-shadow: 0 0 6px rgba(0,0,0,0.5);
   background-color:  #dfe4f2;
   color: #e64626;
-  padding: 0.5em;
+  padding: 0.1em;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
@@ -584,3 +589,30 @@ Accent grey - supportive #F1F1F1
 C=0 M=0 Y=0 K=10
 R=241 G=241 B=241 
 */
+
+
+/* Xaringan panelsets */
+
+.panelset .panel-tabs {
+  size: 0.5rem;
+  font-size: 0.6rem;
+  border-radius: 30px;
+  color: '#004c93'!important;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+} 
+
+/*
+
+.panelset {
+  color: '#004c93';
+  background-color: '#ffffff';
+  panel-tab-active-foreground: '#ffffff';
+  panel-tab-active-background: '#004c93';
+  panel-tab-active-border-color: currentColor;
+  panel-tab-hover-foreground: currentColor;
+  panel-tab-hover-background: unset;
+  panel-tab-hover-border-color: currentColor;
+  panel-tab-inactive-opacity: 0.5;
+  panel-tabs-border-bottom: #ddd; 
+}
