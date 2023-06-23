@@ -273,8 +273,8 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \dfrac{1}{h} \sum_{j=1}^h \left(w_j^P \cdot d_j^
 --
 
 * We reduce the weights for
-  * `R`-tasks as these task have more noice
-  * Free-text questions as the comparison on that kind of task is limited
+  * `R`-tasks as these task have more noise
+  * Essay questions as the comparison on that kind of task is limited
   * Points achieved
   
 --
