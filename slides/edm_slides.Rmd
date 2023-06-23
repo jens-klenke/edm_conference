@@ -120,10 +120,11 @@ name: introduction
 
 * COVID-19 forced universities to switch to online exams
 * Proctoring online exams with video conference software was prohibited by our university
-* We conducted take-home exams as open-book, but collaboration was strictly prohibited
+* We conducted take-home exams as open-book, but collaboration was prohibited
 * Hierarchical clustering algorithms are used to identify groups of potentially colluding students
 * The method successfully finds groups with similar behavior in the exams
 * A proctored comparison group helps categorize students as _uncommonly similar_ 
+  * We used the data from the last time we offered the course
 
 <!-- outstandingly, Paper wording? -->
 
@@ -163,7 +164,7 @@ name: related_work
 .pull-down.blockquote[
 `r arrow_blue` **Aim of the Paper**
 
-Categorize students with a hierarchical clustering algorithm on event logs of our statistical exam and strengthen the analysis with a comparison to a proctored exam group
+Categorize students with a hierarchical clustering algorithm on event logs and strengthen the analysis with a proctored comparison group
 ]
 
 ---
@@ -179,7 +180,7 @@ name: methodology
 * The test group took the unproctored exam at home during the COVID-19 pandemic
   * The comparison group took a proctored exam in the facilities of the university
 * Data cleaning is conducted, removing students with minimal participation or achievement and students with internet problems
-* The difference between the two courses is marginal
+* The differences in content between the two courses and the exams are marginal
 
 ---
 
@@ -220,9 +221,10 @@ $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
 .font90[
 * With 
   * $\displaystyle \sum_{j=1}^h w_j = 1$
+  * $x$ attribute
   * $d_j(x_{ij}, x_{i'j})$ pairwise attribute dissimilarity
-  * $i = 1, ..., N$ students
-  * $j = 1, ..., h$ attributes
+  * $i = 1, ..., N$ index ox student
+  * $j = 1, ..., h$ index of attribute
 ]
 ]
 --
@@ -230,7 +232,7 @@ $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
 .pull-right[
 .font90[
 
-* We compare two different kinds of attributes
+* We compare two different kinds of attributes $x$
   * Dissimilarities in the students event patterns (time of submission)
   * Dissimilarities in points achieved
 ]
@@ -248,8 +250,9 @@ $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
 
 
 * With 
+  * time attribute $x = v$
   * Examination is divided into $m = 1, ... , 70$ time intervals
-  * $v_{ijm}$ denotes the count of answers of student $i$ for task $j$ in the $m$-th interval
+  * $v_{ijm}$ denotes the number of answers of student $i$ for task $j$ in the $m$-th interval
   * Manhatten metric is used 
 
 
@@ -265,6 +268,7 @@ Dissimilarities in points achieved for each task $j$
 $$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
 
 * With 
+  * point attribute $x = s$
   * $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th subtask
   * Manhatten metric is used
 
@@ -308,9 +312,9 @@ style_panelset_tabs(active_foreground = '#ffffff',
 
 
 .panelset[
-.panel[.panel-name[Control]
+.panel[.panel-name[Comparison]
 
-```{r, out.width="100%", fig.align="center", fig.cap=c("<strong> Figure 1: </strong> Dendrogram produced by average linkage clustering of the proctored control group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
+```{r, out.width="100%", fig.align="center", fig.cap=c("<strong> Figure 1: </strong> Dendrogram produced by average linkage clustering of the proctored comparison group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/dendogram_control.png'))
 #95% geht
@@ -445,8 +449,7 @@ name: discussion
 * Collusion in larger groups are not found
 * These results are also found with other linkage methods and parameter specifications as weightings
 * The approach provides a basis for the examination of clusters based on comparison with a reference group
-  * However, the ground truth is not known, limiting the certainty of conclusions
-* Nevertheless, the elevated risk of detection may indeed discourage students from cheating in unproctored exams 
+* The elevated risk of detection may indeed discourage students from cheating in unproctored exams 
 
 
 ---
