@@ -1,7 +1,7 @@
 ---
 title: A Data Mining Approach for Detecting Collusion in Unproctored Online Exams
 author:
-  - name: J. Langerbein
+  - name: <br> J. Langerbein
     affil: (1)
   - name: T. Massing
     affil: (1)
@@ -11,15 +11,15 @@ author:
     affil: (1)
   - name: M. Striewe
     affil: (1)
-  - name: M. Goedicke 
+  - name: <br> M. Goedicke 
     affil: (1) 
-  - name: <br> C. Hanck
+  - name: C. Hanck
     affil: (1)
 affiliation:
   - num: (1)
     address: University of Duisburg-Essen; Germany
 column_numbers: 2
-logoright_name: http&#58;//uni-due.de/imperia/md/images/offen_im_denken/signet_ude_rgb_neg.png
+logoright_name: 'assets/signet_ude_rgb_neg.png' #http&#58;//uni-due.de/imperia/md/images/offen_im_denken/signet_ude_rgb_neg.png
 bibliography: "../resources/library.bib"
 primary_colour: "#004c93"
 poster_width: "33.1in"
@@ -27,25 +27,10 @@ poster_height: "46.8in"
 #nocite: '@*'
 output:  
   posterdown::posterdown_html:
+    css: ["assets/ude.css"]
     self_contained: true
-knit: pagedown::chrome_print
+# knit: pagedown::chrome_print
 ---
-
-<style>
-.poster_title {
-  margin-top: 150px; 
-}
-</style>
-
-
-<style>
-.logo_right {
-    position: relative;
-    top: -30px;
-    right: 100px;
-}
-</style>
-
 
 ```{r, load_refs, include = FALSE, echo=FALSE, cache=FALSE}
 # packages
@@ -86,12 +71,30 @@ knitr::opts_chunk$set(echo = FALSE)
 source(here::here('resources/packages.R'))
 ```
 
-
-
-
 # Methodology
 
-* The study analyzed data from the "Descriptive Statistics" course at the University Duisburg-Essen, Germany, with the intent to compare the outcomes of an unproctored exam ($N=151$) during the COVID-19 pandemic with a proctored exam ($N=109$) held in-person before the pandemic.
+* Data from the *Descriptive Statistics* course at the University Duisburg-Essen, Germany
+* Exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
+* Both exams are conducted digitally with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php)
+
+
+```{r table, echo = FALSE, message = FALSE, warning = FALSE}
+# table  
+groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
+
+
+knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc')) %>%
+  kable_styling(font_size = 5) %>%
+  row_spec(0, bold = TRUE, hline_after = TRUE, background = '#ffffff') %>%
+  column_spec(1, bold = TRUE, width_min = "10em") # %>%
+#  add_header_above(c('$$$$', 'Groups' =2), line = TRUE, background = c('#ffffff', '#ffffff'))
+#   kableExtra::kable_classic_2(full_width = F)
+
+
+```
+
+
+, with the intent to compare the outcomes of an unproctored exam ($N=151$) during the COVID-19 pandemic with a proctored exam ($N=109$) held in-person before the pandemic.
 * The two groups' exams involved solving arithmetical problems, completing R programming tasks, and writing a short essay. During the exam process, student activities and time stamps were tracked in event logs, and the points achieved for each task were recorded.
 * The dataset was cleaned to ensure comparability by removing students with minimal participation or achievement, as well as those who encountered internet issues.
 * The study utilized an agglomerative (bottom-up) hierarchical clustering  algorithm that can be described by following equation:
