@@ -111,8 +111,6 @@ Bangalore, `r rmarkdown::metadata$date`
 # 1. [Discussion](#discussion)
 # 1. [References](#references)
 # 
-
-
 ```
 
 ---
@@ -433,23 +431,27 @@ knitr::include_graphics(here::here('resources/graphics/plot_kl.png'))
 ---
 name: discussion
 
-# Discussion
+### Discussion
 
+.font90[
 * Three notable clusters (**A**, **B**, and **E**) consisting of two students each
 * Collusion in larger groups are not found
 * These results are also found with other linkage methods and parameter specifications as weightings
 * The approach provides a basis for examination of clusters based on comparison with a reference group
   * However, the ground truth is not known, limiting the certainty of conclusions
 * Nevertheless, the elevated risk of detection may indeed discourage students from cheating in unproctored exams 
+]
 
+--
 
-# Further research 
+### Further research 
 
+.font90[
 * Investigating long-term effects of collusion analysis on student behavior 
   * Impact on academic integrity ?
   * Impact of AI on students collusion behavior? 
 * Development of a (better) decision rule to classify conspicuous clusters
-
+]
 
 
 <!--
