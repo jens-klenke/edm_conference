@@ -99,17 +99,21 @@ $15^{th}$ International Conference on Educational Data Mining
 Bangalore, `r rmarkdown::metadata$date`
 ]
 
----
+```{r, eval = FALSE, include = FALSE}
 
-<h1> Outline </h1>
+# <h1> Outline </h1>
+# 
+# $\quad$
+# 1. [Introduction](#introduction)
+# 1. [Related work](#related_work)
+# 1. [Methodology](#methodology)
+# 1. [Empirical Results](#empirical_results)
+# 1. [Discussion](#discussion)
+# 1. [References](#references)
+# 
 
-$\quad$
-1. [Introduction](#introduction)
-1. [Related work](#related_work)
-1. [Methodology](#methodology)
-1. [Empirical Results](#empirical_results)
-1. [Discussion](#discussion)
-1. [References](#references)
+
+```
 
 ---
 name: introduction
@@ -117,13 +121,13 @@ name: introduction
 # Introduction
 
 * COVID-19 forced universities to switch to online exams
-* Proctoring online exams with video conference software is prohibited in the EU by GDPR
-* In this case take-home exams are conducted as open-book, but collaboration is strictly prohibited
+* Proctoring online exams with video conference software was prohibited by our university
+* We conducted take-home exams as open-book, but collaboration was strictly prohibited
 * Hierarchical clustering algorithms are used to identify groups of potentially colluding students
-* The method successfully finds groups with nearly identical behaviour in the exams
+* The method successfully finds groups with similar behavior in the exams
 * A proctored comparison group helps categorize students as _uncommonly similar_ 
 
-<!-- outstandingly -->
+<!-- outstandingly, Paper wording? -->
 
 
 ```{r, echo=FALSE, eval=TRUE}
@@ -431,32 +435,13 @@ name: discussion
 
 # Discussion
 
-* Dendrogram, providing a visual representation of the clustering results
-* Various hierarchical clustering algorithms exist
-  * The data driven cophenetic correlation coefficient is used to assess the algorithms
-  * Average linkage clustering most suitable 
 * Three notable clusters (**A**, **B**, and **E**) consisting of two students each
 * Collusion in larger groups are not found
-* Notable Clusters are further investigated with scatterplots and barcharts
-
-
----
-
-# Discussion 
-
-* Comparison with the results from the comparison group supports the findings
-* Method successfully detects at least three clusters with near identical exams
-  * Independent of the linkage method used
+* These results are also found with other linkage methods and parameter specifications as weightings
 * The approach provides a basis for examination of clusters based on comparison with a reference group
   * However, the ground truth is not known, limiting the certainty of conclusions
 * Nevertheless, the elevated risk of detection may indeed discourage students from cheating in unproctored exams 
-* Important step in adapting to the progressing of digitization of education
-* Equips us better for unforeseen situations in the future
-  * E.g.: pandemics, climate change impacts
 
-
-
----
 
 # Further research 
 
@@ -464,6 +449,25 @@ name: discussion
   * Impact on academic integrity ?
   * Impact of AI on students collusion behavior? 
 * Development of a (better) decision rule to classify conspicuous clusters
+
+
+
+<!--
+* Various hierarchical clustering algorithms exist
+  * The data driven cophenetic correlation coefficient is used to assess the algorithms
+  * Average linkage clustering most suitable 
+* Dendrogram, providing a visual representation of the clustering results
+* Notable clusters are further investigated with scatterplots and barcharts
+
+* Comparison with the results from the comparison group supports the findings
+* Method successfully detects at least three clusters with near identical exams
+  * Independent of the linkage method used
+* Important step in adapting to the progressing of digitization of education
+* Equips us better for unforeseen situations in the future
+  * E.g.: pandemics, climate change impacts
+-->
+
+
 
 ---
 name: references
