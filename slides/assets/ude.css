@@ -36,6 +36,15 @@ To specify the margin of the first title h1
   Custom classes 
 **************************/
 
+.pull-left {
+  float: left;
+  width: 47.5%;
+}
+.pull-right {
+  float: right;
+  width: 47.5%;
+}
+
 .pull-left-2 {
   float: left;
   width: 75%;

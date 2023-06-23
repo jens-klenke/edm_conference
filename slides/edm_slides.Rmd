@@ -2,7 +2,7 @@
 title: "A Data Mining Approach for Detecting Collusion in Unproctored Online Exams<br>"
 subtitle: ""
 author: ""
-date: "11-14 July, 2023"
+date: "July 11-14, 2023"
 location: "Bangalore"
 output:
   xaringan::moon_reader:
@@ -94,7 +94,7 @@ J. Langerbein, T. Massing, .bold[_J. Klenke_],  N. Reckmann, M. Striewe, M. Goed
 <br>
 <br>
 <br>
-$15^{th}$ International Conference on Educational Data Mining
+$16^{th}$ International Conference on Educational Data Mining
 
 Bangalore, `r rmarkdown::metadata$date`
 ]
@@ -154,7 +154,7 @@ name: related_work
 * Previous studies focused on similarity measures for programming exams based on keyboard patterns, e.g. `r Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))` and `r Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))`
 * Other literature (e.g. `r Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 2))`) relies on surveys or interviews, lacking actual student behavior data on collusion
 * Some studies suggest that unsupervised online exams may lead to collusion
-* `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))` used GPA and final exam scores to analyze collusion but no data collected during the exam
+* `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))` used GPA and final exam scores to analyze collusion, but no data was collected during the exam
 
 ]
 
@@ -163,7 +163,7 @@ name: related_work
 .pull-down.blockquote[
 `r arrow_blue` **Aim of the Paper**
 
-Categorize students with hierarchical clustering algorithm on event logs of our statistical exam and strengthen the analysis with a comparison to a proctored exam group
+Categorize students with a hierarchical clustering algorithm on event logs of our statistical exam and strengthen the analysis with a comparison to a proctored exam group
 ]
 
 ---
@@ -173,7 +173,7 @@ name: methodology
 
 * Data for the study are collected from the *Descriptive Statistics* course at the University of Duisburg-Essen, Germany
 * The exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
-* Both exams are conducted digital with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php) 
+* Both exams are conducted digitally with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php) 
   - Each student receives different randomized numerical values across all tasks
   - Event logs capture students' activities, time stamps, and points during the exams for every subtask
 * The test group took the unproctored exam at home during the COVID-19 pandemic
@@ -212,20 +212,28 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'))
 * Global pairwise dissimilarities: 
 
 $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
-.font80[
+<br>
+
+--
+
+.pull-left[
+.font90[
 * With 
   * $\displaystyle \sum_{j=1}^h w_j = 1$
   * $d_j(x_{ij}, x_{i'j})$ pairwise attribute dissimilarity
   * $i = 1, ..., N$ students
   * $j = 1, ..., h$ attributes
 ]
-
+]
 --
 
-.font80[
+.pull-right[
+.font90[
+
 * We compare two different kinds of attributes
-  * Dissimilarities in the student´s event patterns (time of submission)
+  * Dissimilarities in the students event patterns (time of submission)
   * Dissimilarities in points achieved
+]
 ]
 
 ---
@@ -234,13 +242,13 @@ $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
 
 <br>
 
-Dissimilarities in the student´s event patterns (time of submission) for each task $j$  
+Dissimilarities in the students event patterns (time of submission) for each task $j$  
 
 $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
 
 
 * With 
-  * Examination is devided into $m = 1, ... , 70$ time intervals
+  * Examination is divided into $m = 1, ... , 70$ time intervals
   * $v_{ijm}$ denotes the count of answers of student $i$ for task $j$ in the $m$-th interval
   * Manhatten metric is used 
 
@@ -257,7 +265,7 @@ Dissimilarities in points achieved for each task $j$
 $$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
 
 * With 
-  * $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th sub task
+  * $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th subtask
   * Manhatten metric is used
 
 ---
@@ -273,8 +281,8 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \dfrac{1}{h} \sum_{j=1}^h \left(w_j^P \cdot d_j^
 --
 
 * We reduce the weights for
-  * `R`-tasks as these task have more noise
-  * Essay questions as the comparison on that kind of task is limited
+  * `R`-tasks, as these tasks have more noise
+  * Essay questions, as the comparison on that kind of task are limited
   * Points achieved
   
 --
@@ -283,7 +291,7 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \dfrac{1}{h} \sum_{j=1}^h \left(w_j^P \cdot d_j^
 
 ---
 
-<h2>Empirical results — <span style="font-size: 0.8em;">Dendogram</span></h2>
+<h2>Empirical results — <span style="font-size: 0.8em;">Dendrogram</span></h2>
 
 
 ```{r xaringan-panelset, echo=FALSE}
@@ -302,7 +310,7 @@ style_panelset_tabs(active_foreground = '#ffffff',
 .panelset[
 .panel[.panel-name[Control]
 
-```{r, out.width="100%", fig.align="center", fig.cap=c("<strong> Figure 1: </strong> Dendogram produced by average linkage clustering of the proctored control group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
+```{r, out.width="100%", fig.align="center", fig.cap=c("<strong> Figure 1: </strong> Dendrogram produced by average linkage clustering of the proctored control group (2018/19). <strong> G-L </strong> mark the clusters with the lowest dissimilarity"), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/dendogram_control.png'))
 #95% geht
@@ -311,7 +319,7 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_control.png'))
 
 .panel[.panel-name[Test]
 
-```{r, out.width="100%", fig.align="center", fig.cap=c("<strong>Figure 2:</strong>  Dendogram produced by average linkage clustering of the unproctored test group (2020/21). <strong> A-F </strong> mark the clusters with the lowest dissimilarity."), echo=FALSE}
+```{r, out.width="100%", fig.align="center", fig.cap=c("<strong>Figure 2:</strong>  Dendrogram produced by average linkage clustering of the unproctored test group (2020/21). <strong> A-F </strong> mark the clusters with the lowest dissimilarity."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
 
@@ -363,7 +371,7 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm.png'))
 .panelset[
 .panel[.panel-name[AB]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of the clusters <strong>A</strong> and <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of clusters <strong>A</strong> and <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_ab.png'))
 
@@ -372,7 +380,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_ab.png'))
 
 .panel[.panel-name[CD]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.2:</strong> Comparison of the event logs and achieved points of the clusters <strong>C</strong> and <strong>D</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.2:</strong> Comparison of the event logs and achieved points of clusters <strong>C</strong> and <strong>D</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_cd.png'))
 #png ratio 1400 750
@@ -382,7 +390,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_cd.png'))
 
 .panel[.panel-name[EF]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.3:</strong> Comparison of the event logs and achieved points of the clusters <strong>E</strong> and <strong>F</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.3:</strong> Comparison of the event logs and achieved points of clusters <strong>E</strong> and <strong>F</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_ef.png'))
 #png ratio 1400 750
@@ -394,7 +402,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_ef.png'))
 
 .panel[.panel-name[GH]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.4:</strong> Comparison of the event logs and achieved points of the clusters <strong>G</strong> and <strong>H</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.4:</strong> Comparison of the event logs and achieved points of clusters <strong>G</strong> and <strong>H</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_gh.png'))
 #png ratio 1400 750
@@ -405,7 +413,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_gh.png'))
 
 .panel[.panel-name[IJ]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.5:</strong> Comparison of the event logs and achieved points of the clusters <strong>I</strong> and <strong>J</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.5:</strong> Comparison of the event logs and achieved points of clusters <strong>I</strong> and <strong>J</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_ij.png'))
 #png ratio 1400 750
@@ -415,7 +423,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_ij.png'))
 
 .panel[.panel-name[KL]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.6:</strong> Comparison of the event logs and achieved points of the clusters <strong>K</strong> and <strong>L</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.6:</strong> Comparison of the event logs and achieved points of clusters <strong>K</strong> and <strong>L</strong> from the control group (2018/19). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_kl.png'))
 #png ratio 1400 750
@@ -431,27 +439,26 @@ knitr::include_graphics(here::here('resources/graphics/plot_kl.png'))
 ---
 name: discussion
 
-### Discussion
+# Discussion
 
-.font90[
 * Three notable clusters (**A**, **B**, and **E**) consisting of two students each
 * Collusion in larger groups are not found
 * These results are also found with other linkage methods and parameter specifications as weightings
-* The approach provides a basis for examination of clusters based on comparison with a reference group
+* The approach provides a basis for the examination of clusters based on comparison with a reference group
   * However, the ground truth is not known, limiting the certainty of conclusions
 * Nevertheless, the elevated risk of detection may indeed discourage students from cheating in unproctored exams 
-]
 
---
 
-### Further research 
+---
 
-.font90[
+# Further research 
+
+
 * Investigating long-term effects of collusion analysis on student behavior 
   * Impact on academic integrity ?
   * Impact of AI on students collusion behavior? 
 * Development of a (better) decision rule to classify conspicuous clusters
-]
+
 
 
 <!--
@@ -475,12 +482,8 @@ name: discussion
 name: references
 # References
 
-.font80[
-
 ```{r refs1, echo=FALSE, results="asis", warning = FALSE}
 #test_bib <- Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))
 PrintBibliography(my_bib, .opts = list(style = "text", "max.names" = 100), start = 1)
 ```
-]
-
 
