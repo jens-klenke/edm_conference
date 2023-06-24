@@ -399,7 +399,7 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked.png')
 .panelset[
 .panel[.panel-name[AB]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of clusters <strong>A</strong> and <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="90%", fig.align="center", fig.cap=c("<strong>Figure 4.1:</strong> Comparison of the event logs and achieved points of clusters <strong>A</strong> and <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_ab.png'))
 
@@ -408,7 +408,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_ab.png'))
 
 .panel[.panel-name[CD]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.2:</strong> Comparison of the event logs and achieved points of clusters <strong>C</strong> and <strong>D</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="90%", fig.align="center", fig.cap=c("<strong>Figure 4.2:</strong> Comparison of the event logs and achieved points of clusters <strong>C</strong> and <strong>D</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_cd.png'))
 #png ratio 1400 750
@@ -418,7 +418,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_cd.png'))
 
 .panel[.panel-name[EF]
 
-```{r, out.width="80%", fig.align="center", fig.cap=c("<strong>Figure 4.3:</strong> Comparison of the event logs and achieved points of clusters <strong>E</strong> and <strong>F</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="90%", fig.align="center", fig.cap=c("<strong>Figure 4.3:</strong> Comparison of the event logs and achieved points of clusters <strong>E</strong> and <strong>F</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_ef.png'))
 #png ratio 1400 750

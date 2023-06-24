@@ -184,7 +184,7 @@ dev.off()
 
 
 
-###
+### Student plot
 
 
 plot_cluster_stud <- function(data, point_data, clust, k) {
@@ -208,7 +208,8 @@ plot_cluster_stud <- function(data, point_data, clust, k) {
                alpha = 0.9, 
                size = 2) + 
     ylim(limit) +
-    ylab("time") +
+    ylab("Time \n") +
+    xlab("\n Task") +
     theme_classic() +
     theme(
       plot.margin = unit(c(0, 0, 0.5, 0.5), "cm"),
@@ -334,11 +335,16 @@ ggsave(filename = "04_plots/Student_comparison/cowplot_comp_6_rearranged.png",
 
 ###
 
+save(plot_list, file = here::here('00_data/plot_list.Rdata'))
+
 ###############################################
 'Jens: This creates the plot with the event logs for group B. I cut the letter B outand decreased the size of the plot manually in MS paint.'
 ###############################################
 grid_plot_list(plot_list, c(2))
-#grid_plot_list(plot_list, c(1,2))
-#grid_plot_list(plot_list, c(3,4))
-#grid_plot_list(plot_list, c(5,6))
 
+
+grid_plot_list(plot_list, c(1,2))
+grid_plot_list(plot_list, c(3,4))
+grid_plot_list(plot_list, c(5,6))
+
+plot_list
