@@ -48,7 +48,7 @@ dist_boxplot <- function(dist_18_19 = dist_mat_global_filter_time_points_18_19,
                  outlier.alpha = 0.3, 
                  outlier.size = 1.8) +
     xlab("") +
-    ylab("Distance") +
+    ylab("Distance \n") +
     theme_classic() +
     guides(fill = "none", 
            colour = "none") +
@@ -64,14 +64,20 @@ dist_boxplot <- function(dist_18_19 = dist_mat_global_filter_time_points_18_19,
       #           alpha = 0.1)
 }
 
+dist_boxplot_1 <- dist_boxplot() + 
+  ylim(c(0.05, 0.6))
 
+ggsave(dist_boxplot_1, filename = here::here("resources/graphics/boxplot_original.png"),
+       dpi = 1200,
+       height = 3, width = 4)
 
+dist_boxplot_1_marked <- dist_boxplot_1 +
+annotate("rect", xmin = 1.95, xmax = 2.05, ymin = 0.1, ymax = 0.05,
+         alpha = .1,fill = "red", color = 'red')
 
-# Filtered Data with time and points
-dist_boxplot()
-#ggsave(filename = "04_plots/Boxplots/Boxplot_time_points_filtered.pdf", 
-#       height = 4, width = 4)
-
+ggsave(dist_boxplot_1_marked, filename = here::here("resources/graphics/boxplot_original_marked.png"),
+       dpi = 1200,
+       height = 3, width = 4)
 
 
 #---- Wilcoxon Test ----
@@ -93,11 +99,35 @@ norm_degree <- dist_mat_global_filter_time_points_18_19 %$%
   min(dist_L1_norm)
 # -3.124476
 
-# Plot of norm. Dist.
-dist_boxplot(dist = "dist_L1_norm") + ylab("")
-ggsave(filename = "04_plots/Boxplots/Boxplot_time_points_filtered_norm.pdf", 
-       height = 4, width = 4)
+##### trans 
 
+limit_trans_low <- (0.05 - mean(dist_mat_global_filter_time_points_20_21$dist_L1))/sd(dist_mat_global_filter_time_points_20_21$dist_L1)
+
+limit_trans_high <- (0.6 -mean(dist_mat_global_filter_time_points_20_21$dist_L1))/sd(dist_mat_global_filter_time_points_20_21$dist_L1)
+
+
+# Plot of norm. Dist.
+boxplot_norm_1 <- dist_boxplot(dist = "dist_L1_norm") +
+  ylim(c(limit_trans_low, limit_trans_high)) +
+  ylab("")
+
+ggsave(boxplot_norm_1, filename = "resources/graphics/boxplot_norm.png", 
+       dpi = 1200,
+       height = 3, width = 4)
+
+# marked 
+#boxplot_norm_1_marked <- 
+
+trans <- (0.1 -mean(dist_mat_global_filter_time_points_20_21$dist_L1))/sd(dist_mat_global_filter_time_points_20_21$dist_L1)
+trans_1 <- (0.05 -mean(dist_mat_global_filter_time_points_20_21$dist_L1))/sd(dist_mat_global_filter_time_points_20_21$dist_L1)
+
+dist_boxplot_1_marked <- boxplot_norm_1 +
+  annotate("rect", xmin = 1.95, xmax = 2.05, ymin = trans, ymax = trans_1,
+           alpha = .1,fill = "red", color = 'red')
+
+ggsave(dist_boxplot_1_marked, filename = here::here("resources/graphics/boxplot_norm_marked.png"),
+       dpi = 1200,
+       height = 3, width = 4)
 
 ################################################################################
 'Jens: Run code till here to get boxplot with noramlized values '

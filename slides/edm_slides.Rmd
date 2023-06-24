@@ -213,7 +213,6 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'))
 * Global pairwise dissimilarities: 
 
 $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
-<br>
 
 --
 
@@ -366,6 +365,31 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm.png'))
 ```
 ]
 
+---
+
+<h2>Empirical results — <span style="font-size: 0.8em;">Distribution of measured distances </span> </h2>
+
+<br>
+<br>
+
+
+.pull-left[
+```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("<strong>Figure 3.1:</strong> Comparison of the distance measures."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/boxplot_original_marked.png'))
+
+```
+
+
+]
+
+.pull-right[
+```{r, out.width="100%", out.height="60%", fig.align="center", fig.cap=c("<strong>Figure 3.2:</strong> Comparison of the  normalised distance measures."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked.png'))
+
+```
+]
 
 
 ---
