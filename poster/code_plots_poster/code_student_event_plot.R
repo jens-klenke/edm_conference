@@ -2,6 +2,9 @@ source(here::here('01_code/packages.R'))
 # load data
 load(here::here('00_data/plot_list.Rdata'))
 
+#save(log_18_19, log_20_21, L_1_20_21_av_0.2_index, L_1_20_21_av_0.2_index,  plot_list,
+#     file = here::here('00_data/plot_list.Rdata'))
+
 # plot function 
 plot_cluster_stud <- function(data, point_data, clust, k) {
   limit <- range(data$timestamp)
@@ -182,6 +185,60 @@ ggsave(filename = "resources/graphics/plot_ef.png",
        dpi = 1200,
        height = plot_height, width = (21/9)*plot_height)
 
+############################################################################
+## 2018/ 2019
+############################################################################
+
+k <- 1
+plot_list <- list()
+for (i in L1_18_19_av_0.2_index) {
+  plot_list[[k]] <- log_18_19 %>%
+    plot_cluster_stud(point_data = points_18_19, 
+                      clust = i, k = k+6)
+  k <- k + 1
+}
+
+
+# gh 
+cowplot::plot_grid(
+  plot_list[[1]], NULL, plot_list[[2]],
+  labels = c(LETTERS[1+6], "", LETTERS[2+6]),
+  rel_widths = c(1, 0.1, 1),
+  label_size = 48,
+  vjust = 1, #default is 1.5
+  ncol = 3 #changed from 2 to 3
+)
+
+ggsave(filename = "resources/graphics/plot_gh.png", 
+       dpi = 1200,
+       height = plot_height, width = (21/9)*plot_height)
+
+# ij
+cowplot::plot_grid(
+  plot_list[[3]], NULL, plot_list[[4]],
+  labels = c(LETTERS[3+6], "", LETTERS[4+6]),
+  rel_widths = c(1, 0.1, 1),
+  label_size = 48,
+  vjust = 1, #default is 1.5
+  ncol = 3 #changed from 2 to 3
+)
+
+ggsave(filename = "resources/graphics/plot_ij.png", 
+       dpi = 1200,
+       height = plot_height, width = (21/9)*plot_height)
 
 
 
+# kl
+cowplot::plot_grid(
+  plot_list[[5]], NULL, plot_list[[6]],
+  labels = c(LETTERS[5+6], "", LETTERS[6+6]),
+  rel_widths = c(1, 0.1, 1),
+  label_size = 48,
+  vjust = 1, #default is 1.5
+  ncol = 3 #changed from 2 to 3
+)
+
+ggsave(filename = "resources/graphics/plot_kl.png", 
+       dpi = 1200,
+       height = plot_height, width = (21/9)*plot_height)

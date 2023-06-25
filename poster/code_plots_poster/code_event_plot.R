@@ -29,27 +29,27 @@ lab_plot <- function(hcobj) {
 }
 
 
-pdf(file = "04_plots/Dendrogram/dendro_anon_single.pdf", 
-    width = 7, height = 1.5)
-par(mar = c(1, 2, 1, 0))
-L1_20_21_single_filter_time_points %>% 
-  lab_plot()
-dev.off()
-
-pdf(file = "04_plots/Dendrogram/dendro_anon_comp.pdf", 
-    width = 7, height = 1.5)
-par(mar = c(1, 2, 1, 0))
-L1_20_21_complete_filter_time_points %>%
-  lab_plot()
-dev.off()
-
-pdf(file = "04_plots/Dendrogram/dendro_anon_av.pdf", 
-    width = 7, height = 1.5)
-par(mar = c(1, 2, 1, 0))
-L1_20_21_av_filter_points %>%
-  lab_plot()
-dev.off()
-
+# pdf(file = "04_plots/Dendrogram/dendro_anon_single.pdf", 
+#     width = 7, height = 1.5)
+# par(mar = c(1, 2, 1, 0))
+# L1_20_21_single_filter_time_points %>% 
+#   lab_plot()
+# dev.off()
+# 
+# pdf(file = "04_plots/Dendrogram/dendro_anon_comp.pdf", 
+#     width = 7, height = 1.5)
+# par(mar = c(1, 2, 1, 0))
+# L1_20_21_complete_filter_time_points %>%
+#   lab_plot()
+# dev.off()
+# 
+# pdf(file = "04_plots/Dendrogram/dendro_anon_av.pdf", 
+#     width = 7, height = 1.5)
+# par(mar = c(1, 2, 1, 0))
+# L1_20_21_av_filter_points %>%
+#   lab_plot()
+# dev.off()
+# 
 
 
 #---- Organize hclust objects in dendlist ----
