@@ -1,4 +1,6 @@
-source('01_code/packages.R')
+source(here::here('01_code/packages.R'))
+# load data
+load(here::here('00_data/plot_list.Rdata'))
 
 # plot function 
 plot_cluster_stud <- function(data, point_data, clust, k) {
@@ -128,6 +130,12 @@ grid_plot_list <- function(plot_list, index){
 
 plot_height <- 10
 
+# plot B 
+plot_list[[2]]
+
+ggsave(filename = here::here('resources/graphics/plot_b_poster.png'), 
+       dpi = 1200,
+       height = plot_height, width = (21/9)*plot_height)
 
 
 # Plot AB

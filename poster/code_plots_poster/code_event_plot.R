@@ -69,31 +69,6 @@ L1_20_21_dendlist <- dendextend::dendlist(L1_20_21_single_filter_time_points %>%
 names(L1_20_21_dendlist) <- c("single", "complete", "average")
 
 
-# Correlation between dendrograms
-coph_corr <- dendextend::cor.dendlist(L1_20_21_dendlist)
-corrplot::corrplot(coph_corr, "circle", "lower")
-
-
-#---- Cophenetic correlation between distance matrices and dendrogram ----
-L1_20_21_dist <- dist_mat_global_filter_time_points_20_21 %>% 
-  pivot_wider(names_from = v_2, 
-              values_from = dist_L1, 
-              id_cols = v_1) %>%
-  dplyr::select(-v_1) %>%
-  as.dist()
-
-L1_20_21_single_coph <- cophenetic(L1_20_21_single_filter_time_points)
-cor(L1_20_21_dist, L1_20_21_single_coph) 
-# 0.6609849
-
-L1_20_21_complete_coph <- cophenetic(L1_20_21_complete_filter_time_points)
-cor(L1_20_21_dist, L1_20_21_complete_coph)
-# 0.4424279
-
-L1_20_21_av_coph <- cophenetic(L1_20_21_av_filter_points)
-cor(L1_20_21_dist, L1_20_21_av_coph)
-# 0.6963651
-
 
 #---- Compare Students ----
 
@@ -137,51 +112,50 @@ leaf_xy <- tibble(
 clust_xy <- leaf_xy %>% dplyr::slice(which(duplicated(L1_20_21_av_0.2)))
 
 
-# Cut Dendrogram at h = 0.163
-pdf(file = "04_plots/Dendrogram/dendro_anon_av_0.2.pdf", 
-    width = 8, height = 4)
-par(mar = c(0, 4, 0, 0))
-L1_20_21_dendlist$average %>%
-  hang.dendrogram(hang = 0.1) %>%
-  set("labels_cex", 0.55) %>%
-  #dendextend::color_branches(h = 0.163#, 
-  #groupLabels = TRUE
-  #) %>%
-  plot(ylim = c(-0.15, 0.45), 
-       axes = F, 
-       ylab = "proximity")
-#abline(h = 0.163, col = "red")
-axis(side = 2, at = seq(0, 0.4, 0.1))
-for (i in 1:6) {
-  text(x = clust_xy$x[i], 
-       y = clust_xy$y[i], 
-       labels = LETTERS[i])
-}
-dev.off()
+# # Cut Dendrogram at h = 0.163
+# pdf(file = "04_plots/Dendrogram/dendro_anon_av_0.2.pdf", 
+#     width = 8, height = 4)
+# par(mar = c(0, 4, 0, 0))
+# L1_20_21_dendlist$average %>%
+#   hang.dendrogram(hang = 0.1) %>%
+#   set("labels_cex", 0.55) %>%
+#   #dendextend::color_branches(h = 0.163#, 
+#   #groupLabels = TRUE
+#   #) %>%
+#   plot(ylim = c(-0.15, 0.45), 
+#        axes = F, 
+#        ylab = "proximity")
+# #abline(h = 0.163, col = "red")
+# axis(side = 2, at = seq(0, 0.4, 0.1))
+# for (i in 1:6) {
+#   text(x = clust_xy$x[i], 
+#        y = clust_xy$y[i], 
+#        labels = LETTERS[i])
+# }
+# dev.off()
 
 ### AS PNG ###
 
-png(file = "04_plots/Dendrogram/dendro_anon_av_0.21.png", 
-    width = 10000, height = 4000, units = "px", res = 1000)
-par(mar = c(0, 4, 0, 0), mgp=c(2.5, 3, 0))
-L1_20_21_dendlist$average %>%
-  hang.dendrogram(hang = 0.1) %>%
-  set("labels_cex", 0.55) %>%
-  #dendextend::color_branches(h = 0.163#, 
-  #groupLabels = TRUE
-  #) %>%
-  plot(ylim = c(-0.15, 0.45), 
-       axes = F, 
-       ylab = list("Dissimilarity", cex=1.5))
-#abline(h = 0.163, col = "red")
-axis(side = 2, at = seq(0, 0.4, 0.1))
-for (i in 1:6) {
-  text(x = clust_xy$x[i], 
-       y = clust_xy$y[i], 
-       labels = LETTERS[i])
-}
-dev.off()
-
+# png(file = "04_plots/Dendrogram/dendro_anon_av_0.21.png", 
+#     width = 10000, height = 4000, units = "px", res = 1000)
+# par(mar = c(0, 4, 0, 0), mgp=c(2.5, 3, 0))
+# L1_20_21_dendlist$average %>%
+#   hang.dendrogram(hang = 0.1) %>%
+#   set("labels_cex", 0.55) %>%
+#   #dendextend::color_branches(h = 0.163#, 
+#   #groupLabels = TRUE
+#   #) %>%
+#   plot(ylim = c(-0.15, 0.45), 
+#        axes = F, 
+#        ylab = list("Dissimilarity", cex=1.5))
+# #abline(h = 0.163, col = "red")
+# axis(side = 2, at = seq(0, 0.4, 0.1))
+# for (i in 1:6) {
+#   text(x = clust_xy$x[i], 
+#        y = clust_xy$y[i], 
+#        labels = LETTERS[i])
+# }
+# dev.off()
 
 
 ### Student plot
@@ -333,9 +307,9 @@ grid_plot_list(plot_list, changed_order)
 ggsave(filename = "04_plots/Student_comparison/cowplot_comp_6_rearranged.png", 
        height = 9, width = 18)
 
-###
+##
 
-save(plot_list, file = here::here('00_data/plot_list.Rdata'))
+# save(plot_list, log_18_19, log_20_21, file = here::here('00_data/plot_list.Rdata'))
 
 ###############################################
 'Jens: This creates the plot with the event logs for group B. I cut the letter B outand decreased the size of the plot manually in MS paint.'

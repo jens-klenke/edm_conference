@@ -127,7 +127,7 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 
 ```{r, out.width="90%", fig.align="center", fig.cap=c("Eevent logs and achieved points of the cluster <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/group_B.png'))
+knitr::include_graphics(here::here('resources/graphics/plot_b_poster.png'))
 #png ratio 1400 750
 
 ```
@@ -153,7 +153,7 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_new.png'))
 
 ```{r, out.width="90%", fig.align="center", fig.cap=c("Comparison of the  normalised distance measures."), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/Rplot09.png'))
+knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poster.png'))
 
 ```
 

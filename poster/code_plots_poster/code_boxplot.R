@@ -54,11 +54,10 @@ dist_boxplot <- function(dist_18_19 = dist_mat_global_filter_time_points_18_19,
            colour = "none") +
     scale_colour_manual(values = ggthemes::colorblind_pal()(8)[c(2, 6)]) +
     scale_fill_manual(values = ggthemes::colorblind_pal()(8)[c(2, 6)]) +
-    scale_x_discrete(labels = c("Comparison Group \n 18/19", "Test Group \n 20/21"))# +
-#    theme(axis.title.x = element_text(size = 30),   # Increase x axis title size
+    scale_x_discrete(labels = c("Comparison Group \n 18/19", "Test Group \n 20/21")) # +
+#    theme(#axis.title.x = element_text(size = 30),   # Increase x axis title size
 #          axis.title.y = element_text(size = 30),   # Increase y axis title size
-#          axis.text.x = element_text(size = 20),    # Increase x axis tick label size
-#          axis.text.y = element_text(size = 20)) +    # Increase y axis tick label size
+#          axis.text = element_text(size = 30))    # Increase  axis tick label size
     #geom_ellipse(aes(x0 = 2, y0 = -6, a = 0.01, b = 0.02, angle=0), 
      #            fill = "yellow", 
       #           alpha = 0.1)
@@ -78,6 +77,7 @@ annotate("rect", xmin = 1.95, xmax = 2.05, ymin = 0.1, ymax = 0.05,
 ggsave(dist_boxplot_1_marked, filename = here::here("resources/graphics/boxplot_original_marked.png"),
        dpi = 1200,
        height = 3, width = 4)
+
 
 
 #---- Wilcoxon Test ----
@@ -128,6 +128,15 @@ dist_boxplot_1_marked <- boxplot_norm_1 +
 ggsave(dist_boxplot_1_marked, filename = here::here("resources/graphics/boxplot_norm_marked.png"),
        dpi = 1200,
        height = 3, width = 4)
+
+plot_height <- 10
+# Poster 
+ggsave(dist_boxplot_1_marked,
+       filename = here::here('resources/graphics/boxplot_norm_marked_poster.png'),
+       dpi = 1200,
+       height = plot_height, 
+       width = (16/9)*plot_height)
+
 
 ################################################################################
 'Jens: Run code till here to get boxplot with noramlized values '
