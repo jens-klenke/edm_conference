@@ -1,9 +1,12 @@
 source(here::here('01_code/packages.R'))
 # load data
-load(here::here('00_data/plot_list.Rdata'))
+#load(here::here('00_data/plot_list.Rdata'))
+load(here::here('plot_list.Rdata'))
 
-#save(log_18_19, log_20_21, L_1_20_21_av_0.2_index, L_1_20_21_av_0.2_index,  plot_list,
-#     file = here::here('00_data/plot_list.Rdata'))
+save(log_20_21, L_1_20_21_av_0.2_index, clust_ID_20_21, points_20_21,
+     log_18_19, L1_18_19_av_0.2_index, clust_ID_18_19, points_18_19,
+     plot_list, plot_list_18_19, plot_list_20_21,
+     file = here::here('00_data/plot_list.Rdata'))
 
 # plot function 
 plot_cluster_stud <- function(data, point_data, clust, k) {
@@ -110,6 +113,7 @@ plot_cluster_stud <- function(data, point_data, clust, k) {
                     legend = "right", 
                     legend.grob = ggpubr::get_legend(time_plot))
 }
+clust_ID <- clust_ID_20_21
 
 plot_list <- list()
 k <- 1
@@ -120,6 +124,8 @@ for (i in L_1_20_21_av_0.2_index) {
                       k = k)
   k <- k + 1
 }
+
+plot_list_20_21 <- plot_list
 
 grid_plot_list <- function(plot_list, index){
   cowplot::plot_grid(
@@ -133,8 +139,8 @@ grid_plot_list <- function(plot_list, index){
 
 plot_height <- 10
 
-# plot B 
-plot_list[[2]]
+# Poster maybe later; B 
+plot_list_20_21[[2]]
 
 ggsave(filename = here::here('resources/graphics/plot_b_poster.png'), 
        dpi = 1200,
@@ -143,7 +149,7 @@ ggsave(filename = here::here('resources/graphics/plot_b_poster.png'),
 
 # Plot AB
 cowplot::plot_grid(
-  plot_list[[1]], NULL, plot_list[[2]],
+  plot_list_20_21[[1]], NULL, plot_list_20_21[[2]],
   labels = c(LETTERS[1], "", LETTERS[2]),
   rel_widths = c(1, 0.1, 1),
   label_size = 48,
@@ -152,13 +158,12 @@ cowplot::plot_grid(
 )
 
 ggsave(filename = "resources/graphics/plot_ab.png", 
-       dpi = 1200,
+       dpi = 300,
        height = plot_height, width = (21/9)*plot_height)
-
 
 # Plot CD
 cowplot::plot_grid(
-  plot_list[[3]], NULL, plot_list[[4]],
+  plot_list_20_21[[3]], NULL, plot_list_20_21[[4]],
   labels = c(LETTERS[3], "", LETTERS[4]),
   rel_widths = c(1, 0.1, 1),
   label_size = 48,
@@ -167,13 +172,13 @@ cowplot::plot_grid(
 )
 
 ggsave(filename = "resources/graphics/plot_cd.png", 
-       dpi = 1200,
+       dpi = 300,
        height = plot_height, width = (21/9)*plot_height)
 
 
 # Plot EF
 cowplot::plot_grid(
-  plot_list[[5]], NULL, plot_list[[6]],
+  plot_list_20_21[[5]], NULL, plot_list_20_21[[6]],
   labels = c(LETTERS[5], "", LETTERS[6]),
   rel_widths = c(1, 0.1, 1),
   label_size = 48,
@@ -182,12 +187,14 @@ cowplot::plot_grid(
 )
 
 ggsave(filename = "resources/graphics/plot_ef.png", 
-       dpi = 1200,
+       dpi = 300,
        height = plot_height, width = (21/9)*plot_height)
 
 ############################################################################
 ## 2018/ 2019
 ############################################################################
+
+clust_ID <- clust_ID_18_19
 
 k <- 1
 plot_list <- list()
@@ -197,11 +204,11 @@ for (i in L1_18_19_av_0.2_index) {
                       clust = i, k = k+6)
   k <- k + 1
 }
-
+plot_list_18_19 <- plot_list
 
 # gh 
 cowplot::plot_grid(
-  plot_list[[1]], NULL, plot_list[[2]],
+  plot_list_18_19[[1]], NULL, plot_list_18_19[[2]],
   labels = c(LETTERS[1+6], "", LETTERS[2+6]),
   rel_widths = c(1, 0.1, 1),
   label_size = 48,
@@ -210,12 +217,12 @@ cowplot::plot_grid(
 )
 
 ggsave(filename = "resources/graphics/plot_gh.png", 
-       dpi = 1200,
+       dpi = 300,
        height = plot_height, width = (21/9)*plot_height)
 
 # ij
 cowplot::plot_grid(
-  plot_list[[3]], NULL, plot_list[[4]],
+  plot_list_18_19[[3]], NULL, plot_list_18_19[[4]],
   labels = c(LETTERS[3+6], "", LETTERS[4+6]),
   rel_widths = c(1, 0.1, 1),
   label_size = 48,
@@ -224,14 +231,14 @@ cowplot::plot_grid(
 )
 
 ggsave(filename = "resources/graphics/plot_ij.png", 
-       dpi = 1200,
+       dpi = 300,
        height = plot_height, width = (21/9)*plot_height)
 
 
 
 # kl
 cowplot::plot_grid(
-  plot_list[[5]], NULL, plot_list[[6]],
+  plot_list_18_19[[5]], NULL, plot_list_18_19[[6]],
   labels = c(LETTERS[5+6], "", LETTERS[6+6]),
   rel_widths = c(1, 0.1, 1),
   label_size = 48,
@@ -240,5 +247,5 @@ cowplot::plot_grid(
 )
 
 ggsave(filename = "resources/graphics/plot_kl.png", 
-       dpi = 1200,
+       dpi = 300,
        height = plot_height, width = (21/9)*plot_height)
