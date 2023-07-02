@@ -114,10 +114,14 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
 
 
-knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc')) %>%
-  kable_styling(font_size = 20) %>%
+knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'),
+             caption = 'Overview over the test and comparison group') %>%
+  kable_styling(font_size = 28) %>%
   row_spec(0, bold = TRUE, hline_after = TRUE, background = '#ffffff') %>%
-  column_spec(1, bold = TRUE, width_min = "10em") # %>%
+  column_spec(1, bold = TRUE, width_min = "10em")  %>%
+  gsub("font-size: initial !important;", 
+        "font-size: 28pt !important;", 
+         .)
 #  add_header_above(c('$$$$', 'Groups' =2), line = TRUE, background = c('#ffffff', '#ffffff'))
 #   kableExtra::kable_classic_2(full_width = F)
 
@@ -134,30 +138,43 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'))
 <div style="margin-top: -20px;">
 $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))$$
 
-<font size="6"> 
 
-* $D(s_i, s_{i'}, v_i, v_{i'})$ the global pairwise dissimilarity
-* $d_j^P(s_{ij}, s_{i'j})$ points dissimilarity for each task $j$
-* $d_j^L(v_{ij}, v_{i'j})$ students event patterns dissimilarity for each task $j$
-* $\displaystyle \sum_{j=1}^h w_j^P + w_j^L =1$ control the influence of each attribute on the global object dissimilarity
+
+  * $D(s_i, s_{i'}, v_i, v_{i'})$ the global pairwise dissimilarity
+  * $d_j^P(s_{ij}, s_{i'j})$ points dissimilarity for each task $j$
+  * $d_j^L(v_{ij}, v_{i'j})$ students event patterns dissimilarity for each task $j$
+  * $\displaystyle \sum_{j=1}^h w_j^P + w_j^L =1$ control the influence of each attribute on the global object dissimilarity
 * We reduce the weights for
   * `R`-tasks, as these tasks have more noise
   * Essay questions, as the comparison on that kind of task are limited
   * Points achieved
-</font> 
+
+<div style="margin-top: -20px;">
+* Dissimilarities in points achieved for each task $j$ 
+
+$$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
+
+  * $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th subtask
+  * Manhatten metric
+
 
 * Dissimilarities in the students event patterns (time of submission) for each task $j$  
 
 <div style="margin-top: -20px;">
 $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
 
-<font size="6">
+<font size="8">
 
 * $d_j^L(v_{ij}, v_{i'j})$ students event patterns dissimilarity for each task $j$
   * Examination is divided into $m = 1, ... , 70$ time intervals
   * $v_{ijm}$ denotes the number of answers of student $i$ for task $j$ in the $m$-th interval
+  * Manhatten metric
 </font>
 
+<div style="margin-top: -20px;">
+
+$$\;$$
+$$\;$$
 
 # Empirical Results
 
@@ -177,13 +194,9 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_new.png'))
 knitr::include_graphics(here::here('resources/graphics/plot_b_poster.svg'))
 ```
 
-* Figure 2 illustrates the individual comparison of achieved points and event logs of the student cluster with the highest similarity.
-
-
-
-* Figure 3 compares the normalized distributions of the dissimilarity measures between the comparison and test groups.
-* Three data points from the test group are markedly distinct from the rest of the data points.
-
+* Figure 2 illustrates the individual comparison of achieved points and event logs of the student cluster with the highest similarity
+  * Similar time path
+  * Same points for each task 
 
 ```{r, out.width="90%", fig.align="center", fig.cap=c("Comparison of the  normalised distance measures."), echo=FALSE}
 
@@ -191,8 +204,20 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poste
 
 ```
 
+* Figure 3 compares the normalized distributions of the dissimilarity measures between the comparison and test groups
+  * Clusters **A**, **B** and **E** standing out
+
+
 # Discussion
 
+* Three notable clusters (**A**, **B**, and **E**) consisting of two students each
+* Collusion in larger groups are not found
+* These results are also found with other linkage methods and parameter specifications as weightings
+* The approach provides a basis for the examination of clusters based on comparison with a reference group
+* The elevated risk of detection may indeed discourage students from cheating in unproctored exams 
+
+
+```{r, include=FALSE, eval = FALSE}
 * The study discusses the results of hierarchical clustering algorithms, visually represented via a dendrogram, a tree-like structure.
 * Various clustering algorithms were compared, and average linkage clustering was found to be the most suitable for the analysis.
 * The use of average linkage clustering helped identify compact clusters (specifically clusters **A**, **B**, and **E**), suggesting a lack of large group collusion.
@@ -200,11 +225,16 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poste
 * The study used a reference group for comparison, validating the method's effectiveness in detecting collusion, though limitations exist due to unknown ground truth.
 * The approach not only aids in deterring cheating in unproctored exams but also contributes to the broader digital transformation of education, equipping us to handle unforeseen future challenges similar to the COVID-19 pandemic.
 
+```
+
+
+
+
 
 # Further Research
 
-* Future research could assess the long-term efficacy of the collusion detection method during exams and its impact on academic integrity and student behavior.
-* Additional studies might focus on refining methods for gathering and analyzing supplementary evidence, with the ultimate goal of improving collusion detection rates. These efforts aim to provide a better understanding of the prevalence and extent of student collusion.
+* Long-term efficacy of the collusion detection method during exams and its impact on academic integrity and student behavior
+* Refining methods for gathering and analyzing supplementary evidence
 
 <!--
 # References

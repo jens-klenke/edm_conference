@@ -49,6 +49,13 @@ strong {
   color: #004c93 !important;
 }
 
+.table caption {
+    font-size: 28 !important;
+}
+
+.mybreak {
+   break-before: column;
+}
 
 /* font sizes */
 
