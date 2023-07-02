@@ -27,7 +27,7 @@ poster_height: "46.8in"
 #nocite: '@*'
 output:  
   posterdown::posterdown_html:
-    css: ["assets/ude.css"]
+    css: ["assets/ude_poster.css"]
     self_contained: true
 # knit: pagedown::chrome_print
 ---
@@ -71,37 +71,11 @@ knitr::opts_chunk$set(echo = FALSE)
 source(here::here('resources/packages.R'))
 ```
 
-# Methodology
-
-* Data from the *Descriptive Statistics* course at the University Duisburg-Essen, Germany
-* Exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
-* Both exams are conducted digitally with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php)
-
-
-```{r table, echo = FALSE, message = FALSE, warning = FALSE}
-# table  
-groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
-
-
-knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc')) %>%
-  kable_styling(font_size = 5) %>%
-  row_spec(0, bold = TRUE, hline_after = TRUE, background = '#ffffff') %>%
-  column_spec(1, bold = TRUE, width_min = "10em") # %>%
-#  add_header_above(c('$$$$', 'Groups' =2), line = TRUE, background = c('#ffffff', '#ffffff'))
-#   kableExtra::kable_classic_2(full_width = F)
-
-
-```
-
-
+```{r old, include=FALSE, eval = FALSE}
 , with the intent to compare the outcomes of an unproctored exam ($N=151$) during the COVID-19 pandemic with a proctored exam ($N=109$) held in-person before the pandemic.
 * The two groups' exams involved solving arithmetical problems, completing R programming tasks, and writing a short essay. During the exam process, student activities and time stamps were tracked in event logs, and the points achieved for each task were recorded.
 * The dataset was cleaned to ensure comparability by removing students with minimal participation or achievement, as well as those who encountered internet issues.
-* The study utilized an agglomerative (bottom-up) hierarchical clustering  algorithm that can be described by following equation:
 
-
-<div style="margin-top: -20px;">
-$$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
 </div>
 <div style="margin-top: -20px;">
 </div>
@@ -122,21 +96,70 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 
 
 
-# Empirical results
+```
 
 
-```{r, out.width="90%", fig.align="center", fig.cap=c("Eevent logs and achieved points of the cluster <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+# Setting
 
-knitr::include_graphics(here::here('resources/graphics/plot_b_poster.png'))
-#png ratio 1400 750
+* Data from the *Descriptive Statistics* course at the University Duisburg-Essen, Germany
+* Exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
+* Both exams are conducted digitally with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php)
+  * Each student receives different randomized numerical values across all tasks
+  * Event logs capture students' activities, time stamps, and points during the exams for every subtask
+* The test group took the unproctored exam at home during the COVID-19 pandemic
+  * The comparison group took a proctored exam in the facilities of the university
+
+```{r table, echo = FALSE, message = FALSE, warning = FALSE}
+# table  
+groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
+
+
+knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc')) %>%
+  kable_styling(font_size = 20) %>%
+  row_spec(0, bold = TRUE, hline_after = TRUE, background = '#ffffff') %>%
+  column_spec(1, bold = TRUE, width_min = "10em") # %>%
+#  add_header_above(c('$$$$', 'Groups' =2), line = TRUE, background = c('#ffffff', '#ffffff'))
+#   kableExtra::kable_classic_2(full_width = F)
+
 
 ```
 
-* Figure 1 illustrates the individual comparison of achieved points and event logs of the student cluster with the highest similarity.
-* Figure 2 represents the dendrogram of the test group where students took the exam from home.
-* The dendrogram of the test group displays a lower overall level of dissimilarity compared to the comparison group, suggesting possible collusion.
-* Six clusters within the test group, labeled <strong>A-F</strong>, show significantly lower dissimilarity, standing out noticeably from the rest of the cohort.
+* Data cleaning is conducted, removing students with minimal participation or achievement and students with internet problems
 
+# Methodology
+
+* The study utilized an agglomerative (bottom-up) hierarchical clustering  algorithm that can be described by following equation:
+
+
+<div style="margin-top: -20px;">
+$$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))$$
+
+<font size="6"> 
+
+* $D(s_i, s_{i'}, v_i, v_{i'})$ the global pairwise dissimilarity
+* $d_j^P(s_{ij}, s_{i'j})$ points dissimilarity for each task $j$
+* $d_j^L(v_{ij}, v_{i'j})$ students event patterns dissimilarity for each task $j$
+* $\displaystyle \sum_{j=1}^h w_j^P + w_j^L =1$ control the influence of each attribute on the global object dissimilarity
+* We reduce the weights for
+  * `R`-tasks, as these tasks have more noise
+  * Essay questions, as the comparison on that kind of task are limited
+  * Points achieved
+</font> 
+
+* Dissimilarities in the students event patterns (time of submission) for each task $j$  
+
+<div style="margin-top: -20px;">
+$$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
+
+<font size="6">
+
+* $d_j^L(v_{ij}, v_{i'j})$ students event patterns dissimilarity for each task $j$
+  * Examination is divided into $m = 1, ... , 70$ time intervals
+  * $v_{ijm}$ denotes the number of answers of student $i$ for task $j$ in the $m$-th interval
+</font>
+
+
+# Empirical Results
 
 
 ```{r, out.width="100%", fig.align="center", fig.cap=c("Dendogram produced by average linkage clustering of the unproctored test group (2020/21). <strong> A-F </strong> mark the clusters with the lowest dissimilarity."), echo=FALSE}
@@ -144,6 +167,17 @@ knitr::include_graphics(here::here('resources/graphics/plot_b_poster.png'))
 knitr::include_graphics(here::here('resources/graphics/dendogram_new.png'))
 
 ```
+
+* Figure 1 shows the dendrogram of the **test** group
+  * Overall a lower level of dissimilarity compared to the comparison group
+  * Six clusters (<strong>A-F</strong>) standing out noticeably from the rest of the cohort
+
+```{r, out.width="90%", fig.align="center", fig.cap=c("Eevent logs and achieved points of the cluster <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+
+knitr::include_graphics(here::here('resources/graphics/plot_b_poster.svg'))
+```
+
+* Figure 2 illustrates the individual comparison of achieved points and event logs of the student cluster with the highest similarity.
 
 
 
@@ -167,7 +201,7 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poste
 * The approach not only aids in deterring cheating in unproctored exams but also contributes to the broader digital transformation of education, equipping us to handle unforeseen future challenges similar to the COVID-19 pandemic.
 
 
-# Further research
+# Further Research
 
 * Future research could assess the long-term efficacy of the collusion detection method during exams and its impact on academic integrity and student behavior.
 * Additional studies might focus on refining methods for gathering and analyzing supplementary evidence, with the ultimate goal of improving collusion detection rates. These efforts aim to provide a better understanding of the prevalence and extent of student collusion.
