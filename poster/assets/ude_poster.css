@@ -60,3 +60,24 @@ strong {
 /* font sizes */
 
 .font70 , .code70 .remark-code, .code70 .remark-inline-code{ font-size: 70%; }
+
+
+blockquote, .blockquote {
+  display: block;
+  margin-top: 0.1em;
+  margin-bottom: 0.02em;
+  margin-left: 5px;
+  left: 100px;
+  right: 100px;
+  margin-right: 5px;
+  border-left: solid 10px #0148A4;
+  border-top: solid 2px #0148A4;
+  border-bottom: solid 2px #0148A4;
+  border-right: solid 2px #0148A4;
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+  background-color:  #dfe4f2;
+  color: #000000;
+  padding: 0.1em;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}

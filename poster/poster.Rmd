@@ -52,9 +52,16 @@ my_bib <- ReadBib(here::here("resources/library.bib"), check = FALSE)
 
 test1 <- Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))
 
+# pre-define icons
+checker_green <- icons::icon_style(fontawesome$solid$check, fill = "green")
+times_red <- icons::icon_style(fontawesome$solid$times, fill = "red")
+arrow_blue <- icons::icon_style(icons::fontawesome$solid$`arrow-circle-right`, fill = "#004c93")
+desktop <- icons::icon_style(icons::fontawesome$solid$desktop, fill = "#004c93")
+exclamation <- icons::icon_style(icons::fontawesome$solid$exclamation, fill = "#004c93")
+square_right <- icons::icon_style(icons::fontawesome$solid$`caret-square-right`, fill = "#004c93")
+circle_right <- icons::icon_style(icons::fontawesome$solid$`arrow-circle-right`, fill ="#004c93")
 
 ```
-
 
 
 ```{r setup, include=FALSE}
@@ -88,7 +95,6 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 
 ```
 
-
 # Setting
 
 * Data from the *Descriptive Statistics* course at the U Duisburg-Essen, Germany
@@ -96,16 +102,13 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 * Both exams are conducted digitally with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php)
   * Each student receives different randomized numerical values across all tasks
   * Event logs capture students' activities, time stamps, and points during the exams for every subtask
-* The test group took the unproctored exam at home during the pandemic
-  * The comparison group took a proctored exam in the facilities of the university
 
 ```{r table, echo = FALSE, message = FALSE, warning = FALSE}
 # table  
 groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
 
 
-knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'),
-             caption = 'Overview of the test and comparison group') %>%
+knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc')) %>% #,              caption = 'Overview of the test and comparison group') %>%
   kable_styling(font_size = 28) %>%
   row_spec(0, bold = TRUE, hline_after = TRUE, background = '#ffffff') %>%
   column_spec(1, bold = TRUE, width_min = "10em")  %>%
@@ -115,10 +118,23 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'),
 #  add_header_above(c('$$$$', 'Groups' =2), line = TRUE, background = c('#ffffff', '#ffffff'))
 #   kableExtra::kable_classic_2(full_width = F)
 
-
 ```
 
+* The test group took the unproctored exam at home during the pandemic
+  * The comparison group took a proctored exam in the facilities of the university
 * Data cleaning is conducted, removing students with minimal participation or achievement and students with internet problems
+
+
+
+
+<div class="blockquote">
+**Aim of the Paper** 
+
+Categorize students with a hierarchical clustering algorithm on event logs and strengthen the analysis with a proctored comparison group
+</div>
+
+<div style="margin-top: +40px;">
+
 
 # Methodology
 
@@ -138,34 +154,38 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{
   </ul>
 </ul>
 
-<div style="margin-top: -20px;">
-* Dissimilarities in points achieved for each task $j$ 
-
-$$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
-
-  * $s_{ij}$ denotes the points achieved by student $i$ in the $j$-th subtask
-  * Manhatten metric
-
-
-* Dissimilarities in the students event patterns (time of submission) for each task $j$  
-
-<div style="margin-top: -20px;">
-$$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
-
-
-* $d_j^L(v_{ij}, v_{i'j})$ students event patterns dissimilarity for each task $j$
-  * Examination is divided into $m = 1, ... , 70$ time intervals
-  * $v_{ijm}$ denotes the number of answers of student $i$ for task $j$ in the $m$-th interval
-  * Manhatten metric
-
 * We reduce the weights for 
   + `R`-tasks, as these tasks have more noise 
   + Essay questions, as the comparison on that kind of task are limited 
   + Points achieved
 
+* Dissimilarities in points achieved for each task $j$ 
 
+$$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
 
-<div style="margin-top: -20px;">
+<ul> 
+  <ul>
+    <ul>
+      <li> \(s_{ij}\) denotes the points achieved by student \(i\) in the \(j\)-th subtask </li>
+      <li> Manhatten metric </li>
+    </ul>
+  </ul>
+</ul>
+
+* Dissimilarities in the students event patterns (time of submission) for each task $j$  
+
+$$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
+
+<ul> 
+  <ul>
+    <ul>
+      <li> \(d_j^L(v_{ij}, v_{i'j})\) students event patterns dissimilarity for each task \(j\)</li>
+      <li> Examination is divided into \(m = 1, ... , 70\) time intervals </li>
+      <li> \(v_{ijm}\) denotes the number of answers of student \(i\) for task \(j\) in the \(m\)-th interval </li>
+    </ul>
+  </ul>
+</ul>
+
 
 # Empirical Results
 

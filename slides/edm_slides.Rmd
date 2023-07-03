@@ -222,7 +222,7 @@ $$D(x_i, x_{i'}) = \frac{1}{h} \sum_{j=1}^h w_j \cdot d_j(x_{ij}, x_{i'j})$$
   * $\displaystyle \sum_{j=1}^h w_j = 1$
   * $x$ attribute
   * $d_j(x_{ij}, x_{i'j})$ pairwise attribute dissimilarity
-  * $i = 1, ..., N$ index ox student
+  * $i = 1, ..., N$ index of student
   * $j = 1, ..., h$ index of attribute
 ]
 ]
