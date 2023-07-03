@@ -2,21 +2,13 @@
 title: A Data Mining Approach for Detecting Collusion in Unproctored Online Exams
 author:
   - name: <br> J. Langerbein
-    affil: (1)
   - name: T. Massing
-    affil: (1)
   - name: J. Klenke
-    affil: (1)
   - name: N. Reckmann
-    affil: (1)
   - name: M. Striewe
-    affil: (1)
-  - name: <br> M. Goedicke 
-    affil: (1) 
+  - name: <br> M. Goedicke
   - name: C. Hanck
-    affil: (1)
 affiliation:
-  - num: (1)
     address: University of Duisburg-Essen; Germany
 column_numbers: 2
 logoright_name: 'assets/signet_ude_rgb_neg.png' #http&#58;//uni-due.de/imperia/md/images/offen_im_denken/signet_ude_rgb_neg.png
@@ -94,19 +86,17 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{
 is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 </div>
 
-
-
 ```
 
 
 # Setting
 
-* Data from the *Descriptive Statistics* course at the University Duisburg-Essen, Germany
+* Data from the *Descriptive Statistics* course at the U Duisburg-Essen, Germany
 * Exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
 * Both exams are conducted digitally with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php)
   * Each student receives different randomized numerical values across all tasks
   * Event logs capture students' activities, time stamps, and points during the exams for every subtask
-* The test group took the unproctored exam at home during the COVID-19 pandemic
+* The test group took the unproctored exam at home during the pandemic
   * The comparison group took a proctored exam in the facilities of the university
 
 ```{r table, echo = FALSE, message = FALSE, warning = FALSE}
@@ -115,7 +105,7 @@ groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
 
 
 knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'),
-             caption = 'Overview over the test and comparison group') %>%
+             caption = 'Overview of the test and comparison group') %>%
   kable_styling(font_size = 28) %>%
   row_spec(0, bold = TRUE, hline_after = TRUE, background = '#ffffff') %>%
   column_spec(1, bold = TRUE, width_min = "10em")  %>%
@@ -135,19 +125,18 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'),
 * The study utilized an agglomerative (bottom-up) hierarchical clustering  algorithm that can be described by following equation:
 
 
-<div style="margin-top: -20px;">
 $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))$$
 
-
-
-  * $D(s_i, s_{i'}, v_i, v_{i'})$ the global pairwise dissimilarity
-  * $d_j^P(s_{ij}, s_{i'j})$ points dissimilarity for each task $j$
-  * $d_j^L(v_{ij}, v_{i'j})$ students event patterns dissimilarity for each task $j$
-  * $\displaystyle \sum_{j=1}^h w_j^P + w_j^L =1$ control the influence of each attribute on the global object dissimilarity
-* We reduce the weights for
-  * `R`-tasks, as these tasks have more noise
-  * Essay questions, as the comparison on that kind of task are limited
-  * Points achieved
+<ul> 
+  <ul>
+    <ul>
+      <li> \(D(s_i, s_{i'}, v_i, v_{i'})\) the global pairwise dissimilarity </li>
+      <li> \(d_j^P(s_{ij}, s_{i'j})\) points dissimilarity for each task \(j\) </li>
+      <li> \(d_j^L(v_{ij}, v_{i'j})\) students event patterns dissimilarity for each task \(j\) </li>
+      <li> \(\sum_{j=1}^h w_j^P + w_j^L =1\) weight of each attribute \( h\) </li>
+    </ul>
+  </ul>
+</ul>
 
 <div style="margin-top: -20px;">
 * Dissimilarities in points achieved for each task $j$ 
@@ -163,21 +152,22 @@ $$d_j^P(s_{ij}, s_{i'j}) = |  s_{ij} - s_{i'j} |$$
 <div style="margin-top: -20px;">
 $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
 
-<font size="8">
 
 * $d_j^L(v_{ij}, v_{i'j})$ students event patterns dissimilarity for each task $j$
   * Examination is divided into $m = 1, ... , 70$ time intervals
   * $v_{ijm}$ denotes the number of answers of student $i$ for task $j$ in the $m$-th interval
   * Manhatten metric
-</font>
+
+* We reduce the weights for 
+  + `R`-tasks, as these tasks have more noise 
+  + Essay questions, as the comparison on that kind of task are limited 
+  + Points achieved
+
+
 
 <div style="margin-top: -20px;">
 
-$$\;$$
-$$\;$$
-
 # Empirical Results
-
 
 ```{r, out.width="100%", fig.align="center", fig.cap=c("Dendogram produced by average linkage clustering of the unproctored test group (2020/21). <strong> A-F </strong> mark the clusters with the lowest dissimilarity."), echo=FALSE}
 
@@ -195,8 +185,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_b_poster.svg'))
 ```
 
 * Figure 2 illustrates the individual comparison of achieved points and event logs of the student cluster with the highest similarity
-  * Similar time path
-  * Same points for each task 
+  * Similar time path and same points for each task 
 
 ```{r, out.width="90%", fig.align="center", fig.cap=c("Comparison of the  normalised distance measures."), echo=FALSE}
 
@@ -205,16 +194,14 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poste
 ```
 
 * Figure 3 compares the normalized distributions of the dissimilarity measures between the comparison and test groups
-  * Clusters **A**, **B** and **E** standing out
-
 
 # Discussion
 
 * Three notable clusters (**A**, **B**, and **E**) consisting of two students each
 * Collusion in larger groups are not found
-* These results are also found with other linkage methods and parameter specifications as weightings
+* Findings the same with other linkage methods and parameter specifications as weightings
 * The approach provides a basis for the examination of clusters based on comparison with a reference group
-* The elevated risk of detection may indeed discourage students from cheating in unproctored exams 
+
 
 
 ```{r, include=FALSE, eval = FALSE}
@@ -225,16 +212,15 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poste
 * The study used a reference group for comparison, validating the method's effectiveness in detecting collusion, though limitations exist due to unknown ground truth.
 * The approach not only aids in deterring cheating in unproctored exams but also contributes to the broader digital transformation of education, equipping us to handle unforeseen future challenges similar to the COVID-19 pandemic.
 
-```
-
-
-
-
-
 # Further Research
 
 * Long-term efficacy of the collusion detection method during exams and its impact on academic integrity and student behavior
 * Refining methods for gathering and analyzing supplementary evidence
+
+* The elevated risk of detection may indeed discourage students from cheating in unproctored exams 
+```
+
+
 
 <!--
 # References
