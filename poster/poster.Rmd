@@ -21,7 +21,7 @@ output:
   posterdown::posterdown_html:
     css: ["assets/ude_poster.css"]
     self_contained: true
-# knit: pagedown::chrome_print
+knit: pagedown::chrome_print
 ---
 
 ```{r, load_refs, include = FALSE, echo=FALSE, cache=FALSE}
@@ -134,7 +134,9 @@ Categorize students with a hierarchical clustering algorithm on event logs and s
 </div>
 
 <div style="margin-top: +40px;">
-
+$$\; $$
+$$\; $$
+$$\; $$
 
 # Methodology
 
