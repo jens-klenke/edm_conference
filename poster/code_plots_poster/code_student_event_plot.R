@@ -267,7 +267,7 @@ plot_cluster_stud_poster <- function(data, point_data, clust, k) {
                    color = STUDI_ID, 
                    shape = STUDI_ID), 
                alpha = 0.9, 
-               size = 2) + 
+               size = 5) + 
     ylim(limit) +
     ylab("Time \n") +
     xlab("\n Task") +
@@ -276,8 +276,8 @@ plot_cluster_stud_poster <- function(data, point_data, clust, k) {
       plot.margin = unit(c(0, 0, 0.5, 0.5), "cm"),
       panel.grid.major.x = element_line(),
       text = element_text(size = 20), #from 10
-      axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = -0.02, size = 14), # here change
-      axis.text.y = element_text(size = 14), 
+      axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = -0.02, size = 24), # here change
+      axis.text.y = element_text(size = 24), 
       axis.title = element_text(size = 40),### from 8
       legend.title = element_text(size = 28)) + ### from 8
     scale_shape_manual(values = c(16, 5, 0, 6, 4), 
@@ -324,7 +324,7 @@ plot_cluster_stud_poster <- function(data, point_data, clust, k) {
       panel.grid.major.x = element_line(),
       text = element_text(size = 10), 
       axis.text.x = element_blank(), 
-      axis.text.y = element_text(size = 14),
+      axis.text.y = element_text(size = 24),
       axis.ticks.x = element_blank(),
       axis.title.x = element_blank(),
       axis.title.y = element_text(size = 40),###from 8

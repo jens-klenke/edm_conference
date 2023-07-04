@@ -99,7 +99,7 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 
 * Data from the *Descriptive Statistics* course at the U Duisburg-Essen, Germany
 * Exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
-* Both exams are conducted digitally with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php)
+* Both exams are conducted digitally with the e-assessment system JACK
   * Each student receives different randomized numerical values across all tasks
   * Event logs capture students' activities, time stamps, and points during the exams for every subtask
 
@@ -108,7 +108,8 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 groups <- readxl::read_xlsx(here::here('resources/groups.xlsx'))
 
 
-knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc')) %>% #,              caption = 'Overview of the test and comparison group') %>%
+knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'),
+             caption = 'Overview of the test and comparison group') %>%
   kable_styling(font_size = 28) %>%
   row_spec(0, bold = TRUE, hline_after = TRUE, background = '#ffffff') %>%
   column_spec(1, bold = TRUE, width_min = "10em")  %>%
@@ -133,9 +134,7 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'))
 Categorize students with a hierarchical clustering algorithm on event logs and strengthen the analysis with a proctored comparison group
 </div>
 
-<div style="margin-top: +40px;">
-$$\; $$
-$$\; $$
+
 $$\; $$
 
 # Methodology
@@ -160,6 +159,8 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{
   + `R`-tasks, as these tasks have more noise 
   + Essay questions, as the comparison on that kind of task are limited 
   + Points achieved
+
+<div style="margin-top: -20px;">
 
 * Dissimilarities in points achieved for each task $j$ 
 
@@ -201,7 +202,7 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_new.png'))
   * Overall a lower level of dissimilarity compared to the comparison group
   * Six clusters (<strong>A-F</strong>) standing out noticeably from the rest of the cohort
 
-```{r, out.width="90%", fig.align="center", fig.cap=c("Eevent logs and achieved points of the cluster <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
+```{r, out.width="90%", fig.align="center", fig.cap=c("Event logs and achieved points of the cluster <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/plot_b_poster.svg'))
 ```
