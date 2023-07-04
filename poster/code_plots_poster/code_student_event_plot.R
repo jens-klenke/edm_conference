@@ -279,7 +279,8 @@ plot_cluster_stud_poster <- function(data, point_data, clust, k) {
       axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = -0.02, size = 30), # here change
       axis.text.y = element_text(size = 30), 
       axis.title = element_text(size = 40),### from 8
-      legend.title = element_text(size = 28)) + ### from 8
+      legend.title = element_text(size = 40),
+      legend.text = element_text(size = 30)) + ### from 8
     scale_shape_manual(values = c(16, 5, 0, 6, 4), 
                        labels = paste(LETTERS[k], 
                                       as.character(1:2), 

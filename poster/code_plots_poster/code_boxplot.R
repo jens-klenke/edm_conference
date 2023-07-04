@@ -42,9 +42,11 @@ dist_boxplot <- function(dist_18_19 = dist_mat_global_filter_time_points_18_19,
     ggplot(aes_string(x = "group", y = dist)) +
     geom_violin(colour = "white", 
                 aes(fill = group),
-                alpha = 0.25) +
+                alpha = 0.25, 
+                width = 0.3) +
     stat_boxplot(#aes(fill = group),
                  #alpha = 0.8, 
+                 width = 0.25,
                  outlier.alpha = 0.3, 
                  outlier.size = 1.8) +
     xlab("") +
@@ -54,10 +56,12 @@ dist_boxplot <- function(dist_18_19 = dist_mat_global_filter_time_points_18_19,
            colour = "none") +
     scale_colour_manual(values = ggthemes::colorblind_pal()(8)[c(2, 6)]) +
     scale_fill_manual(values = ggthemes::colorblind_pal()(8)[c(2, 6)]) +
-    scale_x_discrete(labels = c("Comparison Group \n 18/19", "Test Group \n 20/21")) # +
-#    theme(#axis.title.x = element_text(size = 30),   # Increase x axis title size
+    scale_x_discrete(labels = c("\n Comparison Group \n 18/19", "\n Test Group \n 20/21")) + # +
+    theme(#axis.title.x = element_text(size = 30),   # Increase x axis title size
 #          axis.title.y = element_text(size = 30),   # Increase y axis title size
-#          axis.text = element_text(size = 30))    # Increase  axis tick label size
+          axis.text.y = element_text(size = 30),
+          axis.text.x = element_text(size = 40)
+          )    # Increase  axis tick label size
     #geom_ellipse(aes(x0 = 2, y0 = -6, a = 0.01, b = 0.02, angle=0), 
      #            fill = "yellow", 
       #           alpha = 0.1)
@@ -66,29 +70,21 @@ dist_boxplot <- function(dist_18_19 = dist_mat_global_filter_time_points_18_19,
 dist_boxplot_1 <- dist_boxplot() + 
   ylim(c(0.05, 0.6))
 
-ggsave(dist_boxplot_1, filename = here::here("resources/graphics/boxplot_original.png"),
-       dpi = 1200,
-       height = 3, width = 4)
+# ggsave(dist_boxplot_1, filename = here::here("resources/graphics/boxplot_original.png"),
+#        dpi = 1200,
+#        height = 3, width = 4)
 
 dist_boxplot_1_marked <- dist_boxplot_1 +
 annotate("rect", xmin = 1.95, xmax = 2.05, ymin = 0.1, ymax = 0.05,
          alpha = .1,fill = "red", color = 'red')
 
-ggsave(dist_boxplot_1_marked, filename = here::here("resources/graphics/boxplot_original_marked.png"),
-       dpi = 1200,
-       height = 3, width = 4)
+# ggsave(dist_boxplot_1_marked, filename = here::here("resources/graphics/boxplot_original_marked.png"),
+#        dpi = 1200,
+#        height = 3, width = 4)
 
-
-
-#---- Wilcoxon Test ----
-
-wilcox.test(x = dist_mat_global_filter_time_points_18_19$dist_L1,
-            y = dist_mat_global_filter_time_points_20_21$dist_L1, 
-            paired = FALSE, 
-            conf.int = TRUE)
-# p-value < 2.2e-16
-
-# Norm Dist
+################################## 
+'Norm Dist'
+#################################
 dist_mat_global_filter_time_points_18_19 %<>%
   dplyr::mutate(dist_L1_norm = (dist_L1 - mean(dist_L1))/sd(dist_L1))
 dist_mat_global_filter_time_points_20_21 %<>%
@@ -111,9 +107,9 @@ boxplot_norm_1 <- dist_boxplot(dist = "dist_L1_norm") +
   ylim(c(limit_trans_low, limit_trans_high)) +
   ylab("")
 
-ggsave(boxplot_norm_1, filename = "resources/graphics/boxplot_norm.png", 
-       dpi = 1200,
-       height = 3, width = 4)
+# ggsave(boxplot_norm_1, filename = "resources/graphics/boxplot_norm.png", 
+#        dpi = 1200,
+#        height = 3, width = 4)
 
 # marked 
 #boxplot_norm_1_marked <- 
@@ -122,61 +118,26 @@ trans <- (0.1 -mean(dist_mat_global_filter_time_points_20_21$dist_L1))/sd(dist_m
 trans_1 <- (0.05 -mean(dist_mat_global_filter_time_points_20_21$dist_L1))/sd(dist_mat_global_filter_time_points_20_21$dist_L1)
 
 dist_boxplot_1_marked <- boxplot_norm_1 +
-  annotate("rect", xmin = 1.95, xmax = 2.05, ymin = trans, ymax = trans_1,
+  annotate("rect", xmin = 1.98, xmax = 2.02, ymin = trans, ymax = trans_1,
            alpha = .1,fill = "red", color = 'red')
 
-ggsave(dist_boxplot_1_marked, filename = here::here("resources/graphics/boxplot_norm_marked.png"),
-       dpi = 1200,
-       height = 3, width = 4)
+# ggsave(dist_boxplot_1_marked, filename = here::here("resources/graphics/boxplot_norm_marked.png"),
+#        dpi = 1200,
+#        height = 3, width = 4)
 
 plot_height <- 10
 # Poster 
+# ggsave(dist_boxplot_1_marked,
+#        filename = here::here('resources/graphics/boxplot_norm_marked_poster.png'),
+#        dpi = 1200,
+#        height = plot_height, 
+#        width = (16/9)*plot_height)
+
 ggsave(dist_boxplot_1_marked,
-       filename = here::here('resources/graphics/boxplot_norm_marked_poster.png'),
+       filename = here::here('resources/graphics/boxplot_norm_marked_poster.svg'),
        dpi = 1200,
        height = plot_height, 
-       width = (16/9)*plot_height)
+       width = (21/9)*plot_height)
 
 
-################################################################################
-'Jens: Run code till here to get boxplot with noramlized values '
-#################################################################################
 
-
-# Detect outliers < "nat. Minimum"
-data_bp <- dist_boxplot(dist = "dist_L1_norm")$data %>%
-  dplyr::filter(group == "20_21")
-
-# Nat. Minimum = Minimum Control Group
-data_bp %>%
-  dplyr::filter(dist_L1_norm < norm_degree) %>%
-  dplyr::arrange(dist_L1_norm)
-# 16
-
-# Detect outliers
-L1_norm_18_19_stats <- boxplot(
-  dist_mat_global_filter_time_points_18_19$dist_L1_norm, 
-  plot = FALSE)$stats
-Q1 <- L1_norm_18_19_stats[2, ]
-Q3 <- L1_norm_18_19_stats[4, ]
-IQR_norm_18_19 <- Q3 - Q1
-
-# "Normal" Outliers
-upper_bound <- Q3 + 1.5 * IQR_norm_18_19
-# 2.57478
-lower_bound <- Q1 - 1.5 * IQR_norm_18_19
-# -2.598332
-
-data_bp %>%
-  dplyr::filter(dist_L1_norm < lower_bound) %>%
-  dplyr::arrange(dist_L1_norm)
-
-# Extreme Outliers
-upper_bound_ex <- Q3 + 3 * IQR_norm_18_19
-# 4.514698
-lower_bound_ex <- Q1 - 3 * IQR_norm_18_19
-# -4.53825
-
-data_bp %>%
-  dplyr::filter(dist_L1_norm < lower_bound_ex) %>%
-  dplyr::arrange(dist_L1_norm)

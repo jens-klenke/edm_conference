@@ -21,7 +21,7 @@ output:
   posterdown::posterdown_html:
     css: ["assets/ude_poster.css"]
     self_contained: true
-knit: pagedown::chrome_print
+#knit: pagedown::chrome_print
 ---
 
 ```{r, load_refs, include = FALSE, echo=FALSE, cache=FALSE}
@@ -97,9 +97,9 @@ is the combined model, where all weights $w_j^P$ and $w_j^L$ add up to one.
 
 # Setting
 
-* Data from the *Descriptive Statistics* course at the U Duisburg-Essen, Germany
+* Data from the *Descriptive Statistics* course at U Duisburg-Essen, Germany
 * Exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
-* Both exams are conducted digitally with the e-assessment system JACK
+* Exams are conducted digitally with the e-assessment system JACK
   * Each student receives different randomized numerical values across all tasks
   * Event logs capture students' activities, time stamps, and points during the exams for every subtask
 
@@ -121,17 +121,18 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'),
 
 ```
 
-* The test group took the unproctored exam at home during the pandemic
-  * The comparison group took a proctored exam in the facilities of the university
-* Data cleaning is conducted, removing students with minimal participation or achievement and students with internet problems
-
-
+* The test group (2020/21) took the unproctored exam at home
+  * The comparison group (2018/19) took a proctored exam at the university
+* Data cleaning is conducted, removing student with
+  + Minimal participation
+  + Minimal achievement 
+  * Internet problems
 
 
 <div class="blockquote">
 **Aim of the Paper** 
 
-Categorize students with a hierarchical clustering algorithm on event logs and strengthen the analysis with a proctored comparison group
+Detecting potential collusion with a hierarchical clustering algorithm on event logs and strengthen the analysis with a proctored comparison group
 </div>
 
 
@@ -200,7 +201,8 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_new.png'))
 
 * Figure 1 shows the dendrogram of the **test** group
   * Overall a lower level of dissimilarity compared to the comparison group
-  * Six clusters (<strong>A-F</strong>) standing out noticeably from the rest of the cohort
+  * Six clusters (<strong>A-F</strong>) standing out noticeably from the rest of the cohort, suggesting potential collusion
+  * The distance between notable clusters and the median distance is greater than in the comparison group
 
 ```{r, out.width="90%", fig.align="center", fig.cap=c("Event logs and achieved points of the cluster <strong>B</strong> from the test group (2020/21). Above the scatter plot, a bar chart is added to compare the points per subtask."), echo=FALSE}
 
@@ -208,11 +210,12 @@ knitr::include_graphics(here::here('resources/graphics/plot_b_poster.svg'))
 ```
 
 * Figure 2 illustrates the individual comparison of achieved points and event logs of the student cluster with the highest similarity
-  * Similar time path and same points for each task 
+  * Similar time path
+  * Achieved same points for each task 
 
 ```{r, out.width="90%", fig.align="center", fig.cap=c("Comparison of the normalized distance measures."), echo=FALSE}
 
-knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poster.png'))
+knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poster.svg'))
 
 ```
 
@@ -220,7 +223,7 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poste
 
 # Discussion
 
-* Three notable clusters (**A**, **B**, and **E**) consisting of two students each
+* Six notable clusters (especially **A**, **B**, and **E**), each consisting of two students 
 * Collusion in larger groups is not found
 * Findings do not depend on linkage methods and parameter specifications
 * The approach provides a basis for the examination of clusters based on comparison with a reference group

@@ -165,8 +165,11 @@ dev.off()
 #########################################################################
 'Jens: The following lines create the dendogram'
 #########################################################################
-png(file = "04_plots/Dendrogram/dendro_anon_av_0.2_new.png", 
-    width = 10000, height = 4000, units = "px", res = 1000)
+plot_height <- 4.75
+
+par(mar = c(0, 4, 0, 0), mgp=c(2.5, 0.5, 0))
+svg(file = here::here('resources/graphics/dendogram_new.svg'), 
+    height = plot_height, width = (21/9)*plot_height)
 par(mar = c(0, 4, 0, 0), mgp=c(2.5, 0.5, 0))
 L1_20_21_dendlist$average %>%
   hang.dendrogram(hang = 0.1) %>%
@@ -185,6 +188,9 @@ for (i in 1:6) {
        labels = LETTERS[i])
 }
 dev.off()
+
+
+
 
 
 #########################################################################
