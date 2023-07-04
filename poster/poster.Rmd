@@ -21,7 +21,7 @@ output:
   posterdown::posterdown_html:
     css: ["assets/ude_poster.css"]
     self_contained: true
-#knit: pagedown::chrome_print
+knit: pagedown::chrome_print
 ---
 
 ```{r, load_refs, include = FALSE, echo=FALSE, cache=FALSE}
