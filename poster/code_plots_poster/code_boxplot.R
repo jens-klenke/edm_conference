@@ -48,7 +48,7 @@ dist_boxplot <- function(dist_18_19 = dist_mat_global_filter_time_points_18_19,
                  #alpha = 0.8, 
                  width = 0.25,
                  outlier.alpha = 0.3, 
-                 outlier.size = 1.8) +
+                 outlier.size = 4) +
     xlab("") +
     ylab("Distance \n") +
     theme_classic() +
