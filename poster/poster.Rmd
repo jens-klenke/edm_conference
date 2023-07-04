@@ -139,7 +139,7 @@ $$\; $$
 
 # Methodology
 
-* The study utilized an agglomerative (bottom-up) hierarchical clustering  algorithm that can be described by following equation:
+* The study utilizes an agglomerative (bottom-up) hierarchical clustering  algorithm characterized by the following equation:
 
 
 $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{ij}, s_{i'j}) + w_j^L \cdot d_j^L (v_{ij}, v_{i'j}))$$
@@ -147,7 +147,7 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{
 <ul> 
   <ul>
     <ul>
-      <li> \(D(s_i, s_{i'}, v_i, v_{i'})\) the global pairwise dissimilarity </li>
+      <li> \(D(s_i, s_{i'}, v_i, v_{i'})\) global pairwise dissimilarity </li>
       <li> \(d_j^P(s_{ij}, s_{i'j})\) points dissimilarity for each task \(j\) </li>
       <li> \(d_j^L(v_{ij}, v_{i'j})\) students event patterns dissimilarity for each task \(j\) </li>
       <li> \(\sum_{j=1}^h w_j^P + w_j^L =1\) weight of each attribute \( h\) </li>
@@ -157,7 +157,7 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \frac{1}{h} \sum_{j=1}^h (w_j^P \cdot d_j^P (s_{
 
 * We reduce the weights for 
   + `R`-tasks, as these tasks have more noise 
-  + Essay questions, as the comparison on that kind of task are limited 
+  + Essay questions, as comparisons on these kinds of tasks are limited 
   + Points achieved
 
 <div style="margin-top: -20px;">
@@ -210,7 +210,7 @@ knitr::include_graphics(here::here('resources/graphics/plot_b_poster.svg'))
 * Figure 2 illustrates the individual comparison of achieved points and event logs of the student cluster with the highest similarity
   * Similar time path and same points for each task 
 
-```{r, out.width="90%", fig.align="center", fig.cap=c("Comparison of the  normalised distance measures."), echo=FALSE}
+```{r, out.width="90%", fig.align="center", fig.cap=c("Comparison of the normalized distance measures."), echo=FALSE}
 
 knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poster.png'))
 
@@ -221,8 +221,8 @@ knitr::include_graphics(here::here('resources/graphics/boxplot_norm_marked_poste
 # Discussion
 
 * Three notable clusters (**A**, **B**, and **E**) consisting of two students each
-* Collusion in larger groups are not found
-* Findings the same with other linkage methods and parameter specifications as weightings
+* Collusion in larger groups is not found
+* Findings do not depend on linkage methods and parameter specifications
 * The approach provides a basis for the examination of clusters based on comparison with a reference group
 
 
