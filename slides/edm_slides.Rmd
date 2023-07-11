@@ -118,6 +118,8 @@ name: introduction
 
 # Introduction
 
+<br>
+
 * COVID-19 forced universities to switch to online exams
 * Proctoring online exams with video conference software was prohibited by our university
 * We conducted take-home exams as open-book, but collaboration was prohibited
@@ -146,17 +148,13 @@ name: related_work
 
 <h1> Related work </h1>
 
-.font80[
+.font90[
 * Limited research exists on unproctored exams at universities 
-
-<!-- prior to the pandemic --> 
-
-* `r Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))` propose a method using event logs to detect collusion in unproctored exams
-* Previous studies focused on similarity measures for programming exams based on keyboard patterns, e.g. `r Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))` and `r Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))`
-* Other literature (e.g. `r Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 2))`) relies on surveys or interviews, lacking actual student behavior data on collusion
-* Some studies suggest that unsupervised online exams may lead to collusion
-* `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))` used GPA and final exam scores to analyze collusion, but no data was collected during the exam
-
+  * `r Citet(my_bib, 'cleophas2021s', .opts = list("max.names" = 1))` propose a method using event logs to detect collusion in unproctored exams
+  * Previous studies focused on similarity measures for programming exams based on keyboard patterns, e.g. `r Citet(my_bib, 'Hellas_2017', .opts = list("max.names" = 1))` and `r Citet(my_bib, 'Leinonen_2016', .opts = list("max.names" = 1))`
+  * Other literature (e.g. `r Citet(my_bib, 'hemming2010online', .opts = list("max.names" = 2))`) relies on surveys or interviews, lacking actual student behavior data on collusion
+  * Some studies suggest that unsupervised online exams may lead to collusion
+  * `r Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))` used GPA and final exam scores to analyze collusion, but no data was collected during the exam
 ]
 
 --
@@ -164,7 +162,7 @@ name: related_work
 .pull-down.blockquote[
 `r arrow_blue` **Aim of the Paper**
 
-Categorize students with a hierarchical clustering algorithm on event logs and strengthen the analysis with a proctored comparison group
+Detecting potential collusion with a hierarchical clustering algorithm on event logs and strengthening the analysis with a proctored comparison group
 ]
 
 ---
@@ -180,7 +178,6 @@ name: methodology
 * The test group took the unproctored exam at home during the COVID-19 pandemic
   * The comparison group took a proctored exam in the facilities of the university
 * Data cleaning is conducted, removing students with minimal participation or achievement and students with internet problems
-* The differences in content between the two courses and the exams are marginal
 
 ---
 
