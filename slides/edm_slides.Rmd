@@ -505,7 +505,10 @@ name: discussion
 * The approach provides a basis for the examination of clusters based on comparison with a reference group
 * The elevated risk of detection may indeed discourage students from cheating in unproctored exams 
 
+???
 
+- Single (minimum distance, long chains) and Complete (longes distance, spherical) Linkage on cluster members
+  - combine cluster with minimum distance 
 ---
 
 # Further research 
