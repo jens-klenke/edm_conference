@@ -125,11 +125,10 @@ name: introduction
 * We conducted take-home exams as open-book, but collaboration was prohibited
 * Hierarchical clustering algorithms are used to identify groups of potentially colluding students
 * The method successfully finds groups with similar behavior in the exams
-* A proctored comparison group helps categorize students as _uncommonly similar_ 
+* A proctored comparison group helps identify students as _uncommonly similar_ 
   * We used the data from the last time we offered the course
 
 <!-- outstandingly, Paper wording? -->
-
 
 ```{r, echo=FALSE, eval=TRUE}
 
@@ -142,6 +141,9 @@ test5 <- Citet(my_bib, 'hollister2009proctored', .opts = list("max.names" = 2))
 
 ```
 
+???
+- GDPR; Discussions in Germany and lawsuits were filed 
+- Comparision group strengthen the analysis
 
 ---
 name: related_work
@@ -165,19 +167,31 @@ name: related_work
 Detecting potential collusion with a hierarchical clustering algorithm on event logs and strengthening the analysis with a proctored comparison group
 ]
 
+???
+- in general the research ist limited 
+- mainly surveys
+
 ---
 name: methodology
 
 <h1> Methodology — <span style="font-size: 0.8em;"> Set-up </span> </h1>
 
 * Data for the study are collected from the *Descriptive Statistics* course at the University of Duisburg-Essen, Germany
-* The exams consist of arithmetical problems, programming tasks in `R`, and a short essay task
+* The exams consist of arithmetical problems, MC-questions, programming tasks in `R`, and a short essay task
 * Both exams are conducted digitally with the e-assessment system [JACK](https://www.uni-due.de/zim/services/jack.php) 
   - Each student receives different randomized numerical values across all tasks
   - Event logs capture students' activities, time stamps, and points during the exams for every subtask
 * The test group took the unproctored exam at home during the COVID-19 pandemic
   * The comparison group took a proctored exam in the facilities of the university
 * Data cleaning is conducted, removing students with minimal participation or achievement and students with internet problems
+
+???
+- Data Descriptive Statistcs
+- arithmetical, MC-questions, R, and essay task 
+  - **interpretating or argumenting against a statement**
+
+- JACK 
+  - randomized numbers but not randomized task
 
 ---
 
@@ -196,11 +210,14 @@ knitr::kable(groups,  col.names = c(' ', 'Comparison', 'Test'), align = ('lcc'))
   column_spec(1, bold = TRUE, width_min = "10em") %>%
   add_header_above(c('$$$$', 'Groups' =2), line = TRUE, background = c('#ffffff', '#ffffff'))
 #   kableExtra::kable_classic_2(full_width = F)
-
-
 ```
 
+???
 
+- comp 109 vs test 151
+- 60 Points
+- 17 vs 19 subtask 
+- both 70 Minutes, 60 minutes for the exam and 10 minutes reading time, which the student can spend however the want
 
 ---
 
@@ -251,7 +268,9 @@ $$d_j^L(v_{ij}, v_{i'j}) = \sum_{m=1}^{K=70} | v_{ijm} - v_{i'jm} |$$
   * $v_{ijm}$ denotes the number of answers of student $i$ for task $j$ in the $m$-th interval
   * Manhatten metric is used 
 
+???
 
+- the division into 1 minute time intervals and counting the answers reduces the noise and revels
 
 ---
   
@@ -289,6 +308,11 @@ $$D(s_i, s_{i'}, v_i, v_{i'}) = \dfrac{1}{h} \sum_{j=1}^h \left(w_j^P \cdot d_j^
 
 * Since dissimilarity measures depend on scale, the attributes are **normalized**
 
+???
+
+- Weights are 50 % for `R` task 
+- Weights are 25 % for points 
+  - We also tried equal weights -> similar pattern
 ---
 
 <h2>Empirical results — <span style="font-size: 0.8em;">Dendrogram</span></h2>
@@ -335,6 +359,13 @@ knitr::include_graphics(here::here('resources/graphics/dendogram_test.png'))
 
 ]
 ]
+
+???
+- Dendrogram of test bit lower -> more similarity (could be due to the exam)
+- 6 clusters standing out 
+- especially clusters **A**, **B** and **E**
+- Clusters distance higher than in the comparision group
+
 
 ---
 
@@ -468,7 +499,9 @@ name: discussion
 
 * Three notable clusters (**A**, **B**, and **E**) consisting of two students each
 * Collusion in larger groups are not found
-* These results are also found with other linkage methods and parameter specifications as weightings
+* Results are not dependent (robust to) 
+  - Linkage methods 
+  - Parameter specifications as weightings
 * The approach provides a basis for the examination of clusters based on comparison with a reference group
 * The elevated risk of detection may indeed discourage students from cheating in unproctored exams 
 
